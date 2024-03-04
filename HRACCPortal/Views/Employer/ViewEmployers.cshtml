@@ -1,9 +1,27 @@
-﻿@model HRACCPortal.Models.clsCrud
+﻿@*
+    @{
+        Layout = null;
+    }
+
+    <!DOCTYPE html>
+
+    <html>
+    <head>
+        <meta name="viewport" content="width=device-width" />
+        <title>ViewEmployers</title>
+    </head>
+    <body>
+        <div>
+        </div>
+    </body>
+    </html>
+*@
+
+@model HRACCPortal.Models.clsCrud
 @{
-    ViewBag.Title = "ViewConsultants";
+    ViewBag.Title = "ViewEmployers";
     Layout = "~/Views/Shared/_Layout.cshtml";
 }
-
 <!--begin::Vendor Stylesheets(used for this page only)-->
 <link href="~/Content/assets/plugins/custom/datatables/datatables.bundle.css" rel="stylesheet" type="text/css" />
 <link href="~/Content/assets/plugins/custom/fullcalendar/fullcalendar.bundle.css" rel="stylesheet" type="text/css" />
@@ -29,7 +47,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <input type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search Consultants" />
+                        <input type="text" data-kt-employer-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search Employers" />
                     </div>
                     <!--end::Search-->
                 </div>
@@ -37,10 +55,10 @@
                 <!--begin::Card toolbar-->
                 <div class="card-toolbar">
                     <!--begin::Toolbar-->
-                    <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
-                        <!--begin::Add customer-->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer" id="btnpopup">Add Consultant</button>
-                        <!--end::Add customer-->
+                    <div class="d-flex justify-content-end" data-kt-employer-table-toolbar="base">
+                        <!--begin::Add employer-->
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_employer" id="btnpopup">Add Employer</button>
+                        <!--end::Add employer-->
                     </div>
                     <!--end::Toolbar-->
 
@@ -56,14 +74,11 @@
                     <thead>
                         <!--begin::Table row-->
                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                            <th class="w-10px pe-2">
-                                #
-                            </th>
-                            <th class="min-w-125px">Consultant Name</th>
+                            <th class="w-10px pe-2">#</th>
+                            <th class="min-w-125px">Name</th>
                             <th class="min-w-125px">Email</th>
                             <th class="min-w-125px">Phone</th>
-                            <th class="min-w-125px">Start Date</th>
-                            <th class="min-w-125px">Last Updated Date</th>
+                            <th>Last Updated Date</th>
                             <th class="min-w-125px">Status</th>
                             <th class="text-end min-w-70px">Actions</th>
                         </tr>
@@ -73,31 +88,30 @@
                     <!--begin::Table body-->
                     <tbody class="fw-semibold text-gray-600">
                         @{
-                            if (Model.ConsultantList.Count > 0)
+                            if (Model.EmployerList.Count > 0)
                             {
-                                foreach (var item in Model.ConsultantList)
+                                foreach (var item in Model.EmployerList)
                                 {
                                     <tr>
                                         <td>
-                                            @item.ConsultantIdPK
+                                            @item.EmployerIdPK
                                         </td>
                                         <!--begin::Name=-->
                                         <td>
-                                            <a href="../../demo1/dist/apps/customers/view.html" class="text-gray-800 text-hover-primary mb-1">@item.FirstName @item.LastName</a>
+                                            <a href="../../demo1/dist/apps/customers/view.html" class="text-gray-800 text-hover-primary mb-1">@item.EmployerName</a>
                                         </td>
                                         <!--end::Name=-->
                                         <!--begin::Email=-->
                                         <td>
-                                            <a href="#" class="text-gray-600 text-hover-primary mb-1">@item.Email</a>
+                                            <a href="#" class="text-gray-600 text-hover-primary mb-1">@item.EmployerContactEmail</a>
                                         </td>
                                         <!--end::Email=-->
-                                        <td>@item.Phone</td>
+                                        <td>@item.EmployerContactPhone</td>
                                         <!--end::Payment method=-->
                                         <!--begin::Date=-->
-                                        <td>@item.StartDate</td>
                                         <td>@item.DateUpdated</td>
                                         <td>
-                                            @if (item.Active)
+                                            @if (item.isActive)
                                             {
                                                 <span class="badge badge-light-success fs-7 fw-bold">Active</span>
                                             }
@@ -113,7 +127,7 @@
 
 
 
-                                            <a href="javascript:void(0)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" id="@item.ConsultantIdPK" onClick="GFG_click(this.id)">
+                                            <a href="javascript:void(0)" class="btn btn-icon btn-bg-light btn-active-color-primary btn-sm me-1" id="@item.EmployerIdPK" onClick="GFG_click(this.id)">
                                                 @*begin::Svg Icon | path: icons/duotune/art/art005.svg*@
                                                 <span class="svg-icon svg-icon-3">
                                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -138,22 +152,22 @@
         </div>
         <!--end::Card-->
         <!--begin::Modals-->
-        <!--begin::Modal - Customers - Add-->
-        <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
+        <!--begin::Modal - Employers - Add-->
+        <div class="modal fade" id="kt_modal_add_employer" tabindex="-1" aria-hidden="true">
             <!--begin::Modal dialog-->
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <!--begin::Modal content-->
                 <div class="modal-content">
                     <!--begin::Form-->
-                    <form id="kt_modal_add_customer_form" class="form" action="#" data-kt-redirect="@Url.Action("ViewConsultants","Consultant")">
+                    <form id="kt_modal_add_employer_form" class="form" action="#" data-kt-redirect="@Url.Action("ViewEmployers","Employer")">
                         <!--begin::Modal header-->
-                        <input type="hidden" name="ConsultantIdPK" value="0" />
-                        <div class="modal-header" id="kt_modal_add_customer_header">
+                        <input type="hidden" name="EmployerIdPK" value="0" />
+                        <div class="modal-header" id="kt_modal_add_employer_header">
                             <!--begin::Modal title-->
-                            <h2 class="fw-bold">Consultant Details</h2>
+                            <h2 class="fw-bold">Employer Details</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
-                            <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary">
+                            <div id="kt_modal_add_employer_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -169,55 +183,23 @@
                         <!--begin::Card body-->
                         <div class="modal-body py-10 px-lg-17">
                             <!--begin::Scroll-->
-                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_employer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_employer_header" data-kt-scroll-wrappers="#kt_modal_add_employer_scroll" data-kt-scroll-offset="300px">
                                 <!--begin::Input group-->
                                 <div class="row g-9 mb-7">
                                     <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
+                                    <div class="col-md-12 fv-row">
                                         <!--begin::Label-->
-                                        <label class="required fs-6 fw-semibold mb-2">First Name</label>
+                                        <label class="required fs-6 fw-semibold mb-2">Name</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input class="form-control form-control-solid" placeholder="First Name" name="FirstName" value="" />
+                                        <input class="form-control form-control-solid" placeholder="Full Name" name="EmployerName" value="" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <!--begin::Label-->
-                                        <label class="required fs-6 fw-semibold mb-2">Last Name</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input class="form-control form-control-solid" placeholder="Last Name" name="LastName" value="" />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Col-->
+
                                 </div>
                                 <!--begin::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row g-9 mb-7">
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <!--begin::Label-->
-                                        <label class=" fs-6 fw-semibold mb-2">Middle Name</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input class="form-control form-control-solid" placeholder="Middle Name" name="MiddleName" value="" />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <!--begin::Label-->
-                                        <label class="required fs-6 fw-semibold mb-2">Abbreviation</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input class="form-control form-control-solid" placeholder="Abbreviation" name="ConsultantNameAbbrv" value="" />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Col-->
-                                </div>
-                                <!--begin::Input group-->
+
                                 <div class="row g-9 mb-7">
                                     <!--begin::Col-->
                                     <div class="col-md-6 fv-row">
@@ -225,7 +207,8 @@
                                         <label class="required fs-6 fw-semibold mb-2">Phone</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input class="form-control form-control-solid" placeholder="Phone" name="Phone" value="" />
+
+                                        <input type="text" class="form-control form-control-solid PNumber" placeholder="Phone" name="EmployerContactPhone" id="EmployerContactPhone" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
@@ -235,7 +218,7 @@
                                         <label class="required fs-6 fw-semibold mb-2">Email</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input class="form-control form-control-solid" placeholder="Email" name="Email" value="" />
+                                        <input class="form-control form-control-solid" placeholder="Email" name="EmployerContactEmail" value="" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
@@ -245,11 +228,11 @@
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold mb-2">
                                         <span class="required">Address1</span>
-                                      @*  <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="Address1" title="Address1"></i> *@
+                                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="Address1" title="Address1"></i>
                                     </label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Address1" name="Address1" value="" />
+                                    <input class="form-control form-control-solid" placeholder="Address1" name="EmployerContactAddress1" value="" />
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
@@ -258,11 +241,11 @@
                                     <!--begin::Label-->
                                     <label class="fs-6 fw-semibold mb-2">
                                         <span class="">Address2</span>
-                                       @* <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Address2"></i> *@
+                                        <i class="fas fa-exclamation-circle ms-1 fs-7" data-bs-toggle="tooltip" title="Address2"></i>
                                     </label>
                                     <!--end::Label-->
                                     <!--begin::Input-->
-                                    <input class="form-control form-control-solid" placeholder="Address2" name="Address2" value="" />
+                                    <input class="form-control form-control-solid" placeholder="Address2" name="EmployerContactAddress2" value="" />
                                     <!--end::Input-->
                                 </div>
                                 <!--end::Input group-->
@@ -274,7 +257,7 @@
                                         <label class="required fs-6 fw-semibold mb-2">City</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input class="form-control form-control-solid" placeholder="City" name="City" value="" />
+                                        <input class="form-control form-control-solid" placeholder="City" name="EmployerContactCity" value="" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
@@ -284,7 +267,7 @@
                                         <label class="required fs-6 fw-semibold mb-2">State</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                       @* <input class="form-control form-control-solid" placeholder="State" name="State" value="" /> *@
+                                        @*<input class="form-control form-control-solid" placeholder="State" name="CustomerContactState" value="" />*@
                                         <select name="dropdown" class="form-select form-select-solid" placeholder="Select State" name="State" />
                                         <option value="">Select State</option>
                                         <option value="">Alabama</option>
@@ -351,42 +334,23 @@
                                         <label class="required fs-6 fw-semibold mb-2">Zip</label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input class="form-control form-control-solid" placeholder="Zip" name="Zip" value="" />
+                                        <input class="form-control form-control-solid" placeholder="Zip" name="EmployerContactZip" value="" />
+                                        <!--end::Input-->
+                                    </div>
+                                    <!--end::Col-->
+                                    <!--begin::Col-->
+                                    <div class="col-md-6 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="required fs-6 fw-semibold mb-2">FEID</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <input class="form-control form-control-solid" placeholder="FEID" name="EmployerFEID" value="" />
                                         <!--end::Input-->
                                     </div>
                                     <!--end::Col-->
 
                                 </div>
                                 <!--end::Input group-->
-                                <!--begin::Input group-->
-                                <div class="row g-9 mb-7">
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <!--begin::Label-->
-                                        <label class="required fs-6 fw-semibold mb-2">Title</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input class="form-control form-control-solid" placeholder="Title" name="Title" value="" />
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <!--begin::Label-->
-                                        <label class="required fs-6 fw-semibold mb-2">Start Date</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <div class="input-group" id="kt_td_picker_date_only" data-td-target-input="nearest" data-td-target-toggle="nearest">
-                                            <input id="StartDate" name="StartDate" type="text" class="form-control form-control-solid" data-td-target="#kt_td_picker_date_only" readonly="readonly" />
-                                            <span class="input-group-text" data-td-target="#kt_td_picker_date_only" data-td-toggle="datetimepicker">
-                                                <i class="fas fa-calendar"></i>
-                                            </span>
-                                        </div>
-                                        <!--end::Input-->
-                                    </div>
-
-                                    <!--end::Col-->
-                                </div>
                                 <!--begin::Input group-->
                                 <div class="row g-9 mb-7">
                                     <!--begin::Col-->
@@ -395,64 +359,24 @@
                                         <label class=" fs-6 fw-semibold mb-2">Active</label>
                                         <!--end::Label-->
                                         <div class="form-check form-check-solid form-switch form-check-custom fv-row">
-                                            <input class="form-check-input w-45px h-30px" type="checkbox" id="Active">
-                                            <label class="form-check-label" for="Active"></label>
+                                            <input class="form-check-input w-45px h-30px" type="checkbox" id="isActive">
+                                            <label class="form-check-label" for="isActive"></label>
                                         </div>
                                     </div>
                                     <!--end::Col-->
 
                                 </div>
-                                <!--begin::Input group-->
-                                <div class="row g-9 mb-7 divact">
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <!--begin::Label-->
-                                        <label class="required fs-6 fw-semibold mb-2">Inactive Reason</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input class="form-control form-control-solid" placeholder="Inactive Reason" name="InactiveReason" id="InactiveReason" value="" />
-                                        <div class="fv-plugins-message-container invalid-feedback" id="divreason" style="display:none;">
-                                            <div data-field="FirstName" data-validator="notEmpty">
-                                                Reason is required
-                                            </div>
-                                        </div>
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <!--begin::Label-->
-                                        <label class="required fs-6 fw-semibold mb-2">Inactive Date</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <div class="input-group" id="kt_td_picker_date_only" data-td-target-input="nearest" data-td-target-toggle="nearest">
-                                            <input id="InactiveDate" name="InactiveDate" type="text" class="form-control form-control-solid" data-td-target="#kt_td_picker_date_only" readonly="readonly" />
-                                            <span class="input-group-text" data-td-target="#kt_td_picker_date_only" data-td-toggle="datetimepicker">
-                                                <i class="fas fa-calendar"></i>
-                                            </span>
-                                            <div class="fv-plugins-message-container invalid-feedback" id="divdate" style="display:none;">
-                                                <div data-field="FirstName" data-validator="notEmpty">
-                                                    Inactive Date is required
-                                                </div>
-                                            </div>
-                                        </div>
-                                        @*<input class="form-control form-control-solid" placeholder="Inactive Date" name="InactiveDate" value="" />*@
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Col-->
-                                </div>
 
-                                <!--end::Input group-->
                             </div>
                         </div>
                         <!--end::Card body-->
                         <!--begin::Modal footer-->
                         <div class="modal-footer flex-center">
                             <!--begin::Button-->
-                            <button type="reset" id="kt_modal_add_customer_cancel" class="btn btn-danger">Discard</button>
+                            <button type="reset" id="kt_modal_add_employer_cancel" class="btn btn-danger me-3">Discard</button>
                             <!--end::Button-->
                             <!--begin::Button-->
-                            <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
+                            <button type="submit" id="kt_modal_add_employer_submit" class="btn btn-primary">
                                 <span class="indicator-label">Submit</span>
                                 <span class="indicator-progress">
                                     Please wait...
@@ -493,37 +417,12 @@
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="~/Content/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
     <script src="~/Content/assets/js/custom/apps/customers/list/list.js"></script>
-    <script src="~/Content/assets/js/custom/apps/customers/add.js"></script>
+    <script src="~/Content/assets/js/custom/apps/customers/Customer.js"></script>
     <script src="~/Content/assets/js/widgets.bundle.js"></script>
     <script src="~/Content/assets/js/custom/widgets.js"></script>
     <!--end::Custom Javascript-->
     <script>
-        $(document).ready(function () {
-            $("#Active").click(function () {
-                var actv = $('input#Active').prop('checked');
-                if (actv == false) {
-                    $(".divact").show();
-                } else {
-                    $("#InactiveReason").val("");
-                    $("#InactiveDate").val("");
-                    $(".divact").hide();
-                }
-            });
-        });
-        $("#InactiveReason").blur(function () {
-            if ($(this).val() == "") {
-                $("#divreason").show();
-            } else {
-                $("#divreason").hide();
-            }
-        });
-        $("#InactiveDate").blur(function () {
-            if ($(this).val() == "") {
-                $("#divdate").show();
-            } else {
-                $("#divdate").hide();
-            }
-        });
+
         new tempusDominus.TempusDominus(document.getElementById("StartDate"), {
             display: {
                 viewMode: "calendar",
@@ -556,36 +455,29 @@
         function GFG_click(clicked) {
             $.ajax({
                 type: "POST",
-                url: '/Consultant/EditConsultant',
+                url: '/Employer/EditEmployer',
                 data: '{id: ' + clicked + '}',
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
                     $("#btnpopup").click();
-                    $("input[name='FirstName']").val(response.cl.FirstName);
-                    $("input[name='ConsultantIdPK']").val(response.cl.ConsultantIdPK);
-                    $("input[name='LastName']").val(response.cl.LastName);
-                    $("input[name='MiddleName']").val(response.cl.MiddleName);
-                    $("input[name='ConsultantNameAbbrv']").val(response.cl.ConsultantNameAbbrv);
-                    $("input[name='Address1']").val(response.cl.Address1);
-                    $("input[name='Address2']").val(response.cl.Address2);
-                    $("input[name='City']").val(response.cl.City);
-                    $("input[name='State']").val(response.cl.State);
-                    $("input[name='Zip']").val(response.cl.Zip);
-                    $("input[name='Phone']").val(response.cl.Phone);
-                    $("input[name='Email']").val(response.cl.Email);
-                    $("input[name='Title']").val(response.cl.Title);
-                    $("input[name='StartDate']").val(response.cl.StartDate);
-                    if (response.cl.Active == true) {
-                        $("#Active").prop('checked', true);
-                        $(".divact").hide();
+                    $("input[name='EmployerName']").val(response.cl.EmployerName);
+                    $("input[name='EmployerIdPK']").val(response.cl.EmployerIdPK);
+                    $("input[name='EmployerContactAddress1']").val(response.cl.EmployerContactAddress1);
+                    $("input[name='EmployerContactAddress2']").val(response.cl.EmployerContactAddress2);
+                    $("input[name='EmployerContactCity']").val(response.cl.EmployerContactCity);
+                    $("input[name='EmployerContactState']").val(response.cl.EmployerContactState);
+                    $("input[name='EmployerContactZip']").val(response.cl.EmployerContactZip);
+                    $("input[name='EmployerContactPhone']").val(response.cl.EmployerContactPhone);
+                    $("input[name='EmployerContactEmail']").val(response.cl.EmployerContactEmail);
+                    $("input[name='EmployerFEID']").val(response.cl.EmployerFEID);
+                    if (response.cl.isActive == true) {
+                        $("#isActive").prop('checked', true);
                     }
-                    if (response.cl.Active == false) {
-                        $("#Active").prop('checked', false);
-                        $(".divact").show();
+                    if (response.cl.isActive == false) {
+                        $("#isActive").prop('checked', false);
                     }
-                    $("input[name='InactiveDate']").val(response.cl.InactiveDate);
-                    $("input[name='InactiveReason']").val(response.cl.InactiveReason);
+
 
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
@@ -608,5 +500,8 @@
 
 
         }
+
+
+
     </script>
 }

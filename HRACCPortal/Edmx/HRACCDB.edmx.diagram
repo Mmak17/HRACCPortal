@@ -18,6 +18,7 @@
         <EntityTypeShape EntityType="HRACCDBModel.Reconcile" Width="1.5" PointX="0.75" PointY="8.5" />
         <EntityTypeShape EntityType="HRACCDBModel.ConsultantPositionDetail" Width="1.5" PointX="2.75" PointY="6.125" />
         <EntityTypeShape EntityType="HRACCDBModel.UserDetail" Width="1.5" PointX="7.375" PointY="8.75" />
+        <EntityTypeShape EntityType="HRACCDBModel.Employer" Width="1.5" PointX="9.375" PointY="6.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

@@ -124,6 +124,26 @@
           <Property Name="AddedBy" Type="nchar" MaxLength="10" />
           <Property Name="UpdatedBy" Type="nchar" MaxLength="10" />
         </EntityType>
+        <EntityType Name="Employer">
+          <Key>
+            <PropertyRef Name="EmployerIdPK" />
+          </Key>
+          <Property Name="EmployerIdPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="EmployerName" Type="nvarchar(max)" />
+          <Property Name="EmployerContactPhone" Type="nvarchar(max)" />
+          <Property Name="EmployerContactEmail" Type="nvarchar(max)" />
+          <Property Name="EmployerContactAddress1" Type="nvarchar(max)" />
+          <Property Name="EmployerContactAddress2" Type="nvarchar(max)" />
+          <Property Name="EmployerContactCity" Type="nvarchar(max)" />
+          <Property Name="EmployerContactState" Type="nvarchar(max)" />
+          <Property Name="EmployerContactZip" Type="nvarchar(max)" />
+          <Property Name="EmployerFEID" Type="nvarchar(max)" />
+          <Property Name="DateAdded" Type="nvarchar(max)" />
+          <Property Name="DateUpdated" Type="nvarchar(max)" />
+          <Property Name="AddedBy" Type="nvarchar(max)" />
+          <Property Name="UpdatedBy" Type="nvarchar(max)" />
+          <Property Name="isActive" Type="bit" Nullable="false" />
+        </EntityType>
         <EntityType Name="Invoice">
           <Key>
             <PropertyRef Name="InvoiceIdPK" />
@@ -230,6 +250,7 @@
           <EntitySet Name="Customer" EntityType="Self.Customer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employee" EntityType="Self.Employee" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="EmployeeRole" EntityType="Self.EmployeeRole" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Employer" EntityType="Self.Employer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InvoiceReconcile" EntityType="Self.InvoiceReconcile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
@@ -361,6 +382,7 @@
           <EntitySet Name="Reconciles" EntityType="HRACCDBModel.Reconcile" />
           <EntitySet Name="ConsultantPositionDetails" EntityType="HRACCDBModel.ConsultantPositionDetail" />
           <EntitySet Name="UserDetails" EntityType="HRACCDBModel.UserDetail" />
+          <EntitySet Name="Employers" EntityType="HRACCDBModel.Employer" />
         </EntityContainer>
         <EntityType Name="Position">
           <Key>
@@ -490,6 +512,26 @@
           <Property Name="DateUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AddedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Employer">
+          <Key>
+            <PropertyRef Name="EmployerIdPK" />
+          </Key>
+          <Property Name="EmployerIdPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="EmployerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployerContactPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployerContactEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployerContactAddress1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployerContactAddress2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployerContactCity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployerContactState" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployerContactZip" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="EmployerFEID" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateAdded" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="Boolean" Nullable="false" />
         </EntityType>
       </Schema>
     </edmx:ConceptualModels>
@@ -724,6 +766,27 @@
                 <ScalarProperty Name="Password" ColumnName="Password" />
                 <ScalarProperty Name="UserName" ColumnName="UserName" />
                 <ScalarProperty Name="UserId" ColumnName="UserId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Employers">
+            <EntityTypeMapping TypeName="HRACCDBModel.Employer">
+              <MappingFragment StoreEntitySet="Employer">
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="EmployerFEID" ColumnName="EmployerFEID" />
+                <ScalarProperty Name="EmployerContactZip" ColumnName="EmployerContactZip" />
+                <ScalarProperty Name="EmployerContactState" ColumnName="EmployerContactState" />
+                <ScalarProperty Name="EmployerContactCity" ColumnName="EmployerContactCity" />
+                <ScalarProperty Name="EmployerContactAddress2" ColumnName="EmployerContactAddress2" />
+                <ScalarProperty Name="EmployerContactAddress1" ColumnName="EmployerContactAddress1" />
+                <ScalarProperty Name="EmployerContactEmail" ColumnName="EmployerContactEmail" />
+                <ScalarProperty Name="EmployerContactPhone" ColumnName="EmployerContactPhone" />
+                <ScalarProperty Name="EmployerName" ColumnName="EmployerName" />
+                <ScalarProperty Name="EmployerIdPK" ColumnName="EmployerIdPK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

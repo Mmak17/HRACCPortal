@@ -1,7 +1,7 @@
-"use strict";
+﻿"use strict";
 
 // Class definition
-var KTModalCustomersAdd = function () {
+var KTModalEmployersAdd = function () {
     var submitButton;
     var cancelButton;
     var closeButton;
@@ -16,83 +16,97 @@ var KTModalCustomersAdd = function () {
             form,
             {
                 fields: {
-                    'FirstName': {
+                    'EmployerName': {
                         validators: {
+                            stringLength: {
+                                max: 60,
+                                message: 'The name must be less than 60 characters',
+                            },
                             notEmpty: {
-                                message: 'First name is required'
+                                message: 'Name is required'
                             }
                         }
                     },
-                    'LastName': {
+
+                    'EmployerContactPhone': {
                         validators: {
-                            notEmpty: {
-                                message: 'Last name is required'
-                            }
-                        }
-                    },
-                    'Address1': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Address is required'
-                            }
-                        }
-                    },
-                    'ConsultantNameAbbrv': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Consultant Name Abbreviation is required'
-                            }
-                        }
-                    },
-                    'Phone': {
-                        validators: {
+                            //phone: {
+                            //      country: function () {
+                            //          return form.querySelector('[name="US"]').value;
+                            //      },
+                            //       message: 'The value is not a valid phone number',
+                            //   },
                             notEmpty: {
                                 message: 'Phone is required'
                             }
                         }
                     },
-                    'Email': {
+                    'EmployerContactEmail': {
                         validators: {
+                            emailAddress: {
+                                message: 'The value is not a valid email address'
+                            },
                             notEmpty: {
                                 message: 'Email is required'
                             }
                         }
                     },
-                    'StartDate': {
+                    'EmployerContactAddress1': {
                         validators: {
+
+                            stringLength: {
+                                max: 100,
+                                message: 'Address cannot cannot be more than 100 characters',
+                            },
                             notEmpty: {
-                                message: 'Start Date is required'
+                                message: 'Address is required'
                             }
                         }
                     },
-                    'City': {
+                    'EmployerContactCity': {
                         validators: {
+                            regexp: {
+                                regexp: /^[a-zA-z] ?([a-zA-z]|[a-zA-z] ).*[a-zA-z]$/,
+                                message: 'Please enter valid city with min 3 characters',
+                            },
+                            stringLength: {
+                                max: 50,
+                                message: 'City cannot cannot be more than 50 characters',
+                            },
                             notEmpty: {
                                 message: 'City is required'
                             }
                         }
                     },
-                    'State': {
+                    'EmployerContactState': {
                         validators: {
+                            stringLength: {
+                                max: 40,
+                                message: 'State cannot cannot be more than 40 characters',
+                            },
                             notEmpty: {
                                 message: 'State is required'
                             }
                         }
                     },
-                    'Zip': {
+                    'EmployerContactZip': {
                         validators: {
+                            regexp: {
+                                regexp: /^\d{5}$/,
+                                message: 'The US zip code must contain 5 digits',
+                            },
                             notEmpty: {
-                                message: 'Zip is required'
+                                message: 'ZipCode is required'
                             }
                         }
                     },
-                    'Title': {
+                    'EmployerFEID': {
                         validators: {
                             notEmpty: {
-                                message: 'Title is required'
+                                message: 'FEID is required'
                             }
                         }
-                    },
+                    }
 
                 },
                 plugins: {
@@ -115,7 +129,7 @@ var KTModalCustomersAdd = function () {
         // Action buttons
         submitButton.addEventListener('click', function (e) {
             e.preventDefault();
-            debugger;
+            //debugger;
             // Validate form before submit
             if (validator) {
                 validator.validate().then(function (status) {
@@ -128,46 +142,24 @@ var KTModalCustomersAdd = function () {
 
                         // Disable submit button whilst loading
                         //submitButton.disabled = true;
-                        var ConsultantObj = {};
-                        ConsultantObj.FirstName = form.FirstName.value;
-                        ConsultantObj.LastName = form.LastName.value;
-                        ConsultantObj.MiddleName = form.MiddleName.value;
-                        ConsultantObj.ConsultantNameAbbrv = form.ConsultantNameAbbrv.value;
-                        ConsultantObj.Address1 = form.Address1.value;
-                        ConsultantObj.Address2 = form.Address2.value;
-                        ConsultantObj.City = form.City.value;
-                        ConsultantObj.State = form.State.value;
-                        ConsultantObj.Zip = form.Zip.value;
-                        ConsultantObj.Phone = form.Phone.value;
-                        ConsultantObj.Email = form.Email.value;
-                        ConsultantObj.Title = form.Title.value;
-                        ConsultantObj.StartDate = form.StartDate.value;
-                        var actv = $('input#Active').prop('checked');
-                        ConsultantObj.Active = actv;
+                        var employer = {};
+                        employer.EmployerName = form.EmployerName.value;
+                        employer.EmployerContactPhone = form.EmployerContactPhone.value;
+                        employer.EmployerContactEmail = form.EmployerContactEmail.value;
+                        employer.EmployerContactAddress1 = form.EmployerContactAddress1.value;
+                        employer.EmployerContactAddress2 = form.EmployerContactAddress2.value;
+                        employer.EmployerContactCity = form.EmployerContactCity.value;
+                        employer.EmployerContactState = form.EmployerContactState.value;
+                        employer.EmployerContactZip = form.EmployerContactZip.value;
+                        var actv = $('input#isActive').prop('checked');
+                        employer.isActive = actv;
 
-                        if (actv == false && form.InactiveReason.value == "") {
-                            $("#divreason").show();
-                            submitButton.setAttribute('data-kt-indicator', 'off');
-                            return false;
-                        } else {
-                            $("#divreason").hide();
-                        }
-                        if (actv == false && form.InactiveDate.value == "") {
-                            $("#divdate").show();
-                            submitButton.setAttribute('data-kt-indicator', 'off');
-                            return false;
-                        } else {
-                            $("#divdate").hide();
-                        }
-                        ConsultantObj.InactiveDate = form.InactiveDate.value;
-                        ConsultantObj.InactiveReason = form.InactiveReason.value;
-                        ConsultantObj.ConsultantIdPK = form.ConsultantIdPK.value;
-                        console.log("ConsultantObj:" + JSON.stringify(ConsultantObj))
+                        employer.EmployerIdPK = form.EmployerIdPK.value;
+                        console.log("employer:" + JSON.stringify(employer))
                         $.ajax({
                             type: "POST",
-                            //url: '@Url.Action("AddConsultant", "Consultant")',
-                            url: '/Consultant/AddConsultant',
-                            data: '{consultant: ' + JSON.stringify(ConsultantObj) + '}',
+                            url: '/Employer/AddEmployer',
+                            data: '{employer: ' + JSON.stringify(employer) + '}',
                             dataType: "json",
                             contentType: "application/json; charset=utf-8",
                             success: function (response) {
@@ -312,12 +304,12 @@ var KTModalCustomersAdd = function () {
         // Public functions
         init: function () {
             // Elements
-            modal = new bootstrap.Modal(document.querySelector('#kt_modal_add_customer'));
+            modal = new bootstrap.Modal(document.querySelector('#kt_modal_add_employer'));
 
-            form = document.querySelector('#kt_modal_add_customer_form');
-            submitButton = form.querySelector('#kt_modal_add_customer_submit');
-            cancelButton = form.querySelector('#kt_modal_add_customer_cancel');
-            closeButton = form.querySelector('#kt_modal_add_customer_close');
+            form = document.querySelector('#kt_modal_add_employer_form');
+            submitButton = form.querySelector('#kt_modal_add_employer_submit');
+            cancelButton = form.querySelector('#kt_modal_add_employer_cancel');
+            closeButton = form.querySelector('#kt_modal_add_employer_close');
 
             handleForm();
         }
@@ -326,5 +318,5 @@ var KTModalCustomersAdd = function () {
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-    KTModalCustomersAdd.init();
+    KTModalEmployersAdd.init();
 });

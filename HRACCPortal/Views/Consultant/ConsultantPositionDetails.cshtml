@@ -163,46 +163,10 @@
                                 </span>
                                 <!--end::Svg Icon-->
                             </div>
-                            <!--end::Close-->
+                            <!--end::Close-->                          
                         </div>
                         <!--end::Modal header-->
                         <!--begin::Card body-->
-                        <div class="modal-body py-10 px-lg-17">
-                            <!--begin::Scroll-->
-                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
-                                <!--begin::Input group-->
-                                <div class="row g-9 mb-7">
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <!--begin::Label-->
-                                        <label class="required fs-6 fw-semibold mb-2">Position Start Date</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <div class="input-group" id="kt_td_picker_date_only" data-td-target-input="nearest" data-td-target-toggle="nearest">
-                                            <input id="PositionStartDate" name="PositionStartDate" type="text" class="form-control form-control-solid" data-td-target="#kt_td_picker_date_only" readonly="readonly" />
-                                            <span class="input-group-text" data-td-target="#kt_td_picker_date_only" data-td-toggle="datetimepicker">
-                                                <i class="fas fa-calendar"></i>
-                                            </span>
-                                        </div>
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Col-->
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <!--begin::Label-->
-                                        <label class="required fs-6 fw-semibold mb-2">Position End Date</label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <div class="input-group" id="kt_td_picker_date_only" data-td-target-input="nearest" data-td-target-toggle="nearest">
-                                            <input id="PositionEndDate" name="PositionEndDate" type="text" class="form-control form-control-solid" data-td-target="#kt_td_picker_date_only" readonly="readonly" />
-                                            <span class="input-group-text" data-td-target="#kt_td_picker_date_only" data-td-toggle="datetimepicker">
-                                                <i class="fas fa-calendar"></i>
-                                            </span>
-                                        </div>
-                                        <!--end::Input-->
-                                    </div>
-                                    <!--end::Col-->
-                                </div>
                                 <div class="row g-9 mb-7">
                                     <div class="col-md-6 fv-row">
                                         <!--begin::Input group-->
@@ -254,7 +218,7 @@
                                                 <span class="required">Select Position Rate</span>
                                             </label>
                                             <!--end::Label
-                                            <!--begin::Input-->
+            <!--begin::Input-->
                                             <select name="PositionRateIdFK" aria-label="Select a Position Rate" data-control="select2" data-placeholder="Select a Position Rate..." data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bold PositionRateIdFK">
                                                 <option value="">Select a Consultant...</option>
                                                 @foreach (var item in Model.ddlPositionsRateList)
@@ -266,49 +230,85 @@
                                         </div>
                                         <!--end::Input group-->
                                     </div>
-                                    <!--begin::Col-->
-                                    <div class="col-md-6 fv-row">
-                                        <!--begin::Label-->
-                                        <label class=" fs-6 fw-semibold mb-2">Active</label>
-                                        <!--end::Label-->
-                                        <div class="form-check form-check-solid form-switch form-check-custom fv-row">
-                                            <input class="form-check-input w-45px h-30px" type="checkbox" id="PositionActive" name="PositionActive">
-                                            <label class="form-check-label" for="PositionActive"></label>
+                                    <div class="modal-body py-10 px-lg-17">
+                                        <!--begin::Scroll-->
+                                        <div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+                                            <!--begin::Input group-->
+                                            <div class="row g-9 mb-7">
+                                                <!--begin::Col-->
+                                                <div class="col-md-6 fv-row">
+                                                    <!--begin::Label-->
+                                                    <label class="required fs-6 fw-semibold mb-2">Position Start Date</label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Input-->
+                                                    <div class="input-group" id="kt_td_picker_date_only" data-td-target-input="nearest" data-td-target-toggle="nearest">
+                                                        <input id="PositionStartDate" name="PositionStartDate" type="text" class="form-control form-control-solid" data-td-target="#kt_td_picker_date_only" readonly="readonly" />
+                                                        <span class="input-group-text" data-td-target="#kt_td_picker_date_only" data-td-toggle="datetimepicker">
+                                                            <i class="fas fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+                                                    <!--end::Input-->
+                                                </div>
+                                                <!--end::Col-->
+                                                <!--begin::Col-->
+                                                <div class="col-md-6 fv-row">
+                                                    <!--begin::Label-->
+                                                    <label class="required fs-6 fw-semibold mb-2">Position End Date</label>
+                                                    <!--end::Label-->
+                                                    <!--begin::Input-->
+                                                    <div class="input-group" id="kt_td_picker_date_only" data-td-target-input="nearest" data-td-target-toggle="nearest">
+                                                        <input id="PositionEndDate" name="PositionEndDate" type="text" class="form-control form-control-solid" data-td-target="#kt_td_picker_date_only" readonly="readonly" />
+                                                        <span class="input-group-text" data-td-target="#kt_td_picker_date_only" data-td-toggle="datetimepicker">
+                                                            <i class="fas fa-calendar"></i>
+                                                        </span>
+                                                    </div>
+                                                    <!--end::Input-->
+                                                </div>
+                                                <!--end::Col-->
+                                            </div>
+                                            <!--begin::Col-->
+                                            <div class="col-md-6 fv-row">
+                                                <!--begin::Label-->
+                                                <label class=" fs-6 fw-semibold mb-2">Active</label>
+                                                <!--end::Label-->
+                                                <div class="form-check form-check-solid form-switch form-check-custom fv-row">
+                                                    <input class="form-check-input w-45px h-30px" type="checkbox" id="PositionActive" name="PositionActive">
+                                                    <label class="form-check-label" for="PositionActive"></label>
+                                                </div>
+                                            </div>
+                                            <!--end::Col-->
+
                                         </div>
+
+
                                     </div>
-                                    <!--end::Col-->
+                                    <!--end::Card body-->
+                                    <!--begin::Modal footer-->
+                                    <div class="modal-footer flex-center">
+                                        <!--begin::Button-->
+                                        <button type="reset" id="kt_modal_add_customer_cancel" class="btn btn-danger me-3">Discard</button>
+                                        <!--end::Button-->
+                                        <!--begin::Button-->
+                                        <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
+                                            <span class="indicator-label">Submit</span>
+                                            <span class="indicator-progress">
+                                                Please wait...
+                                                <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
+                                            </span>
+                                        </button>
+                                        <!--end::Button-->
+                                    </div>
+                                    <!--end::Modal footer-->
+                                    <!--begin::Actions-->
+                                    <!--<div class="card-footer d-flex justify-content-end py-6 px-9">
+        <button type="submit" class="btn btn-light btn-active-light-primary me-2" id="btnReset">Discard</button>
 
+        <button type="submit" class="btn btn-primary" id="btnSave">Save Changes</button>
+    </div>-->
+                                    <!--end::Actions-->
+                                    <input type="hidden">
+                                    <input type="hidden" id="pk">
                                 </div>
-
-
-                            </div>
-                            <!--end::Card body-->
-                            <!--begin::Modal footer-->
-                            <div class="modal-footer flex-center">
-                                <!--begin::Button-->
-                                <button type="reset" id="kt_modal_add_customer_cancel" class="btn btn-danger me-3">Discard</button>
-                                <!--end::Button-->
-                                <!--begin::Button-->
-                                <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
-                                    <span class="indicator-label">Submit</span>
-                                    <span class="indicator-progress">
-                                        Please wait...
-                                        <span class="spinner-border spinner-border-sm align-middle ms-2"></span>
-                                    </span>
-                                </button>
-                                <!--end::Button-->
-                            </div>
-                            <!--end::Modal footer-->
-                            <!--begin::Actions-->
-                            <!--<div class="card-footer d-flex justify-content-end py-6 px-9">
-                                <button type="submit" class="btn btn-light btn-active-light-primary me-2" id="btnReset">Discard</button>
-
-                                <button type="submit" class="btn btn-primary" id="btnSave">Save Changes</button>
-                            </div>-->
-                            <!--end::Actions-->
-                            <input type="hidden">
-                            <input type="hidden" id="pk">
-                            </div>
                     </form>
                     <!--end::Form-->
                 </div>

@@ -16,8 +16,7 @@ namespace HRACCPortal.Models
         public InvoiceModel invoiceModel;
         public InvoiceObjectModel invoiceObjectModel;
         public ConsultantPositionDetailsModel consultantPositionDetailsModel;
-        //For Employees
-       // public EmployeesModel employeesModel;
+        public EmployerModel employerModel; //For Employer Table
         public clsCrud()
         {
             customerModel = new CustomerModel();
@@ -25,13 +24,11 @@ namespace HRACCPortal.Models
             invoiceModel = new InvoiceModel();
             invoiceObjectModel = new InvoiceObjectModel();
             consultantPositionDetailsModel = new ConsultantPositionDetailsModel();
-            //For Employees
-          //  employeesModel = new EmployeesModel();
+            employerModel = new EmployerModel(); //For Employer Table
             entities = new HRACCDBEntities();
         }
         public List<CustomerModel> CustomerList { get; set; }
-        //For Employees
-      //  public List<EmployeesModel> EmployeesList { get; set; }
+        public List<EmployerModel> EmployerList { get; set; } //For Employer Table
         public List<ConsultantModel> ConsultantList { get; set; }
         public List<ConsultantPositionDetailsModel> ConsultantPositionDetailsList { get; set; }
 
@@ -197,6 +194,130 @@ namespace HRACCPortal.Models
             customerModel.CustomerIdPK = customer.CustomerIdPK;
             customerModel.isActive = customer.isActive;
             return customerModel;
+        }
+
+        #endregion
+
+        #region Employer
+
+        public string AddEmployer(EmployerModel employer)
+        {
+            if (employer.EmployerIdPK > 0)
+            {
+                var employerModel = entities.Employers.Where(x => x.EmployerIdPK == employer.EmployerIdPK).FirstOrDefault();
+                employerModel.AddedBy = "Admin";
+                employerModel.EmployerContactAddress1 = employer.EmployerContactAddress1;
+                employerModel.EmployerContactAddress2 = employer.EmployerContactAddress2;
+                employerModel.EmployerContactCity = employer.EmployerContactCity;
+                employerModel.EmployerContactEmail = employer.EmployerContactEmail;
+                employerModel.EmployerContactPhone = employer.EmployerContactPhone;
+                employerModel.EmployerContactState = employer.EmployerContactState;
+                employerModel.EmployerContactZip = employer.EmployerContactZip;
+                employerModel.EmployerName = employer.EmployerName;
+                if (!string.IsNullOrEmpty(employer.EmployerName))
+                {
+                    employerModel.EmployerFEID = employer.EmployerFEID;
+                }
+                else
+                {
+                    employerModel.EmployerFEID = "30";
+                }
+                employerModel.DateUpdated = DateTime.Now.ToString("MM/dd/yyyy").Replace("-", "/");
+                employerModel.UpdatedBy = "ADMIN";
+                employerModel.EmployerIdPK = employer.EmployerIdPK;
+                employerModel.isActive = employer.isActive;
+                int i = entities.SaveChanges();
+                if (i > 0)
+                {
+                    return "updated";
+                }
+                else
+                {
+                    return "fail";
+                }
+            }
+            else
+            {
+                var cons = entities.Consultants.Where(x => x.Email == employer.EmployerContactEmail).ToList();
+                if (cons.Count > 0)
+                {
+                    return "Email already exist";
+                }
+
+                Employer scust = new Employer
+                {
+                    AddedBy = employer.AddedBy,
+                    EmployerContactAddress1 = employer.EmployerContactAddress1,
+                    EmployerContactAddress2 = employer.EmployerContactAddress2,
+                    EmployerContactCity = employer.EmployerContactCity,
+                    EmployerContactEmail = employer.EmployerContactEmail,
+                    EmployerContactPhone = employer.EmployerContactPhone,
+                    EmployerContactState = employer.EmployerContactState,
+                    EmployerContactZip = employer.EmployerContactZip,
+                    EmployerName = employer.EmployerName,
+                    EmployerFEID = employer.EmployerFEID,
+                    DateAdded = DateTime.Now.ToString("MM/dd/yyyy").Replace("-", "/"),
+                    DateUpdated = DateTime.Now.ToString("MM/dd/yyyy").Replace("-", "/"),
+                    UpdatedBy = "Admin",
+                    isActive = employer.isActive
+                };
+
+                entities.Employers.AddObject(scust);
+                int i = entities.SaveChanges();
+                if (i > 0)
+                {
+                    return "success";
+                }
+                else
+                {
+                    return "fail";
+                }
+            }
+        }
+        public void GetEmployers()
+        {
+            EmployerList = (from g in entities.Employers
+                            select g
+                               ).AsEnumerable().Select(employer => new EmployerModel
+                               {
+                                   AddedBy = employer.AddedBy,
+                                   EmployerContactAddress1 = employer.EmployerContactAddress1,
+                                   EmployerContactAddress2 = employer.EmployerContactAddress2,
+                                   EmployerContactCity = employer.EmployerContactCity,
+                                   EmployerContactEmail = employer.EmployerContactEmail,
+                                   EmployerContactPhone = employer.EmployerContactPhone,
+                                   EmployerContactState = employer.EmployerContactState,
+                                   EmployerContactZip = employer.EmployerContactZip,
+                                   EmployerName = employer.EmployerName,
+                                   EmployerFEID = employer.EmployerFEID,
+                                   DateAdded = employer.DateAdded,
+                                   // DateUpdated = Convert.ToDateTime(customer.DateUpdated).ToString("MMM,dd, yyyy"),
+                                   DateUpdated = DateTime.Now.ToString("MMM,dd,yyyy"),
+                                   // DateUpdated = customer.DateUpdated,
+                                   UpdatedBy = employer.UpdatedBy,
+                                   EmployerIdPK = employer.EmployerIdPK,
+                                   isActive = employer.isActive
+                               }).ToList();
+        }
+        public EmployerModel GetEmployerById(int id)
+        {
+            var employer = entities.Employers.Where(x => x.EmployerIdPK == id).FirstOrDefault();
+            employerModel.AddedBy = employer.AddedBy;
+            employerModel.EmployerContactAddress1 = employer.EmployerContactAddress1;
+            employerModel.EmployerContactAddress2 = employer.EmployerContactAddress2;
+            employerModel.EmployerContactCity = employer.EmployerContactCity;
+            employerModel.EmployerContactEmail = employer.EmployerContactEmail;
+            employerModel.EmployerContactPhone = employer.EmployerContactPhone;
+            employerModel.EmployerContactState = employer.EmployerContactState;
+            employerModel.EmployerContactZip = employer.EmployerContactZip;
+            employerModel.EmployerName = employer.EmployerName;
+            employerModel.EmployerFEID = employer.EmployerFEID;
+            employerModel.DateAdded = employer.DateAdded;
+            employerModel.DateUpdated = employer.DateUpdated;
+            employerModel.UpdatedBy = employer.UpdatedBy;
+            employerModel.EmployerIdPK = employer.EmployerIdPK;
+            employerModel.isActive = employer.isActive;
+            return employerModel;
         }
 
         #endregion
@@ -449,6 +570,7 @@ namespace HRACCPortal.Models
                                           join p in entities.Positions on cpd.PositionIdFK equals p.PositionIdPK
                                           join pr in entities.PositionRates on p.PositionIdPK equals pr.PositionIdFK
                                           join c in entities.Customers on p.CustomerIdFK equals c.CustomerIdPK
+                                    //      join e in entities.Employers on p.EmployerIdFK equals e.EmployerIdPK
                                           where inv.InvoiceIdPK == id
                                           select new { inv, cpd, p, c, ct, pr }).AsEnumerable().Select(x => new InvoicePdfModel
                                           {

@@ -220,7 +220,7 @@ var KTModalCustomersAdd = function () {
                 cancelButtonText: "No, return",
                 customClass: {
                     confirmButton: "btn btn-primary",
-                    cancelButton: "btn btn-active-light"
+                    cancelButton: "btn btn-success"
                 }
             }).then(function (result) {
                 if (result.value) {
@@ -252,7 +252,7 @@ var KTModalCustomersAdd = function () {
                 cancelButtonText: "No, return",
                 customClass: {
                     confirmButton: "btn btn-primary",
-                    cancelButton: "btn btn-active-light"
+                    cancelButton: "btn btn-success"
                 }
             }).then(function (result) {
                 if (result.value) {
