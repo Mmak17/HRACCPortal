@@ -5,6 +5,38 @@
     <!-- SSDL content -->
     <edmx:StorageModels>
     <Schema Namespace="HRACCDBModel.Store" Provider="System.Data.SqlClient" ProviderManifestToken="2008" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="ActiveConsultants">
+          <Key>
+            <PropertyRef Name="ActiveConsultantId" />
+          </Key>
+          <Property Name="ActiveConsultantId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="ConsultantIdFK" Type="int" Nullable="false" />
+          <Property Name="PositionNo" Type="nvarchar(max)" />
+          <Property Name="Hours" Type="nvarchar(max)" />
+          <Property Name="OTHours" Type="nvarchar(max)" />
+          <Property Name="Total" Type="nvarchar(max)" />
+          <Property Name="DateAdded" Type="nvarchar(max)" />
+          <Property Name="DateUpdated" Type="nvarchar(max)" />
+          <Property Name="AddedBy" Type="nvarchar(max)" />
+          <Property Name="UpdatedBy" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="BalanceSheet">
+          <Key>
+            <PropertyRef Name="BalanceSheetId" />
+          </Key>
+          <Property Name="BalanceSheetId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerIdFK" Type="int" Nullable="false" />
+          <Property Name="Year" Type="nvarchar(max)" />
+          <Property Name="Month" Type="nvarchar(max)" />
+          <Property Name="InvoiceNumber" Type="nvarchar(max)" />
+          <Property Name="InvoiceAmount" Type="nvarchar(max)" />
+          <Property Name="PaymentReceived" Type="nvarchar(max)" />
+          <Property Name="Balance" Type="nvarchar(max)" />
+          <Property Name="DateAdded" Type="nvarchar(max)" />
+          <Property Name="DateUpdated" Type="nvarchar(max)" />
+          <Property Name="AddedBy" Type="nvarchar(max)" />
+          <Property Name="UpdatedBy" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Company">
           <Key>
             <PropertyRef Name="CompanyIdPK" />
@@ -164,6 +196,19 @@
           <Property Name="AddedBy" Type="nvarchar(max)" />
           <Property Name="UpdatedBy" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="InvoiceGeneration">
+          <Key>
+            <PropertyRef Name="InvoiceGenerationId" />
+          </Key>
+          <Property Name="InvoiceGenerationId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="InvoiceDate" Type="nvarchar(max)" />
+          <Property Name="InvoiceMonth" Type="nvarchar(max)" />
+          <Property Name="InvoiceDueDate" Type="nvarchar(max)" />
+          <Property Name="DateAdded" Type="nvarchar(max)" />
+          <Property Name="DateUpdated" Type="nvarchar(max)" />
+          <Property Name="AddedBy" Type="nvarchar(max)" />
+          <Property Name="UpdatedBy" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="InvoiceReconcile">
           <Key>
             <PropertyRef Name="InvoiceReconcileIdPK" />
@@ -173,6 +218,19 @@
           <Property Name="ReconcileIdFK" Type="int" Nullable="false" />
           <Property Name="Reconcile" Type="nvarchar(max)" />
           <Property Name="InvoiceAmount" Type="nvarchar(max)" />
+          <Property Name="DateAdded" Type="nvarchar(max)" />
+          <Property Name="DateUpdated" Type="nvarchar(max)" />
+          <Property Name="AddedBy" Type="nvarchar(max)" />
+          <Property Name="UpdatedBy" Type="nvarchar(max)" />
+        </EntityType>
+        <EntityType Name="InvoiceSubmission">
+          <Key>
+            <PropertyRef Name="InvoiceSubmissionId" />
+          </Key>
+          <Property Name="InvoiceSubmissionId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerIdFK" Type="int" Nullable="false" />
+          <Property Name="Year" Type="nvarchar(max)" />
+          <Property Name="Month" Type="nvarchar(max)" />
           <Property Name="DateAdded" Type="nvarchar(max)" />
           <Property Name="DateUpdated" Type="nvarchar(max)" />
           <Property Name="AddedBy" Type="nvarchar(max)" />
@@ -243,7 +301,21 @@
           <Property Name="AddedBy" Type="nvarchar(max)" />
           <Property Name="UpdatedBy" Type="nvarchar(max)" />
         </EntityType>
+        <Association Name="FK_InvoiceGeneration_InvoiceGeneration">
+          <End Role="InvoiceGeneration" Type="Self.InvoiceGeneration" Multiplicity="1" />
+          <End Role="InvoiceGeneration1" Type="Self.InvoiceGeneration" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceGeneration">
+              <PropertyRef Name="InvoiceGenerationId" />
+            </Principal>
+            <Dependent Role="InvoiceGeneration1">
+              <PropertyRef Name="InvoiceGenerationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
         <EntityContainer Name="HRACCDBModelStoreContainer">
+          <EntitySet Name="ActiveConsultants" EntityType="Self.ActiveConsultants" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="BalanceSheet" EntityType="Self.BalanceSheet" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Company" EntityType="Self.Company" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Consultant" EntityType="Self.Consultant" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="ConsultantPositionDetails" EntityType="Self.ConsultantPositionDetails" Schema="dbo" store:Type="Tables" />
@@ -252,11 +324,17 @@
           <EntitySet Name="EmployeeRole" EntityType="Self.EmployeeRole" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Employer" EntityType="Self.Employer" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Invoice" EntityType="Self.Invoice" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceGeneration" EntityType="Self.InvoiceGeneration" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="InvoiceReconcile" EntityType="Self.InvoiceReconcile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="InvoiceSubmission" EntityType="Self.InvoiceSubmission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PositionRate" EntityType="Self.PositionRate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reconcile" EntityType="Self.Reconcile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="FK_InvoiceGeneration_InvoiceGeneration" Association="Self.FK_InvoiceGeneration_InvoiceGeneration">
+            <End Role="InvoiceGeneration" EntitySet="InvoiceGeneration" />
+            <End Role="InvoiceGeneration1" EntitySet="InvoiceGeneration" />
+          </AssociationSet>
         </EntityContainer>
       </Schema></edmx:StorageModels>
     <!-- CSDL content -->
@@ -383,7 +461,15 @@
           <EntitySet Name="ConsultantPositionDetails" EntityType="HRACCDBModel.ConsultantPositionDetail" />
           <EntitySet Name="UserDetails" EntityType="HRACCDBModel.UserDetail" />
           <EntitySet Name="Employers" EntityType="HRACCDBModel.Employer" />
-        </EntityContainer>
+          <EntitySet Name="ActiveConsultants" EntityType="HRACCDBModel.ActiveConsultant" />
+          <EntitySet Name="InvoiceGenerations" EntityType="HRACCDBModel.InvoiceGeneration" />
+          <EntitySet Name="InvoiceSubmissions" EntityType="HRACCDBModel.InvoiceSubmission" />
+          <AssociationSet Name="FK_InvoiceGeneration_InvoiceGeneration" Association="HRACCDBModel.FK_InvoiceGeneration_InvoiceGeneration">
+            <End Role="InvoiceGeneration" EntitySet="InvoiceGenerations" />
+            <End Role="InvoiceGeneration1" EntitySet="InvoiceGenerations" />
+          </AssociationSet>
+          <EntitySet Name="BalanceSheets" EntityType="HRACCDBModel.BalanceSheet" />
+          </EntityContainer>
         <EntityType Name="Position">
           <Key>
             <PropertyRef Name="PositionIdPK" />
@@ -533,7 +619,79 @@
           <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="isActive" Type="Boolean" Nullable="false" />
         </EntityType>
-      </Schema>
+        <EntityType Name="ActiveConsultant">
+          <Key>
+            <PropertyRef Name="ActiveConsultantId" />
+          </Key>
+          <Property Name="ActiveConsultantId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="ConsultantIdFK" Type="Int32" Nullable="false" />
+          <Property Name="PositionNo" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Hours" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="OTHours" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Total" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateAdded" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="InvoiceGeneration">
+          <Key>
+            <PropertyRef Name="InvoiceGenerationId" />
+          </Key>
+          <Property Name="InvoiceGenerationId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="InvoiceDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceMonth" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceDueDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateAdded" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <NavigationProperty Name="InvoiceGeneration1" Relationship="HRACCDBModel.FK_InvoiceGeneration_InvoiceGeneration" FromRole="InvoiceGeneration" ToRole="InvoiceGeneration1" />
+          <NavigationProperty Name="InvoiceGeneration2" Relationship="HRACCDBModel.FK_InvoiceGeneration_InvoiceGeneration" FromRole="InvoiceGeneration1" ToRole="InvoiceGeneration" />
+        </EntityType>
+        <EntityType Name="InvoiceSubmission">
+          <Key>
+            <PropertyRef Name="InvoiceSubmissionId" />
+          </Key>
+          <Property Name="InvoiceSubmissionId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerIdFK" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Month" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateAdded" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <Association Name="FK_InvoiceGeneration_InvoiceGeneration">
+          <End Type="HRACCDBModel.InvoiceGeneration" Role="InvoiceGeneration" Multiplicity="1" />
+          <End Type="HRACCDBModel.InvoiceGeneration" Role="InvoiceGeneration1" Multiplicity="0..1" />
+          <ReferentialConstraint>
+            <Principal Role="InvoiceGeneration">
+              <PropertyRef Name="InvoiceGenerationId" />
+            </Principal>
+            <Dependent Role="InvoiceGeneration1">
+              <PropertyRef Name="InvoiceGenerationId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityType Name="BalanceSheet">
+          <Key>
+            <PropertyRef Name="BalanceSheetId" />
+          </Key>
+          <Property Name="BalanceSheetId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerIdFK" Type="Int32" Nullable="false" />
+          <Property Name="Year" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Month" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceAmount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="PaymentReceived" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Balance" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateAdded" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        </Schema>
     </edmx:ConceptualModels>
     <!-- C-S mapping content -->
     <edmx:Mappings>
@@ -790,7 +948,69 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-        </EntityContainerMapping>
+          <EntitySetMapping Name="ActiveConsultants">
+            <EntityTypeMapping TypeName="HRACCDBModel.ActiveConsultant">
+              <MappingFragment StoreEntitySet="ActiveConsultants">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="Total" ColumnName="Total" />
+                <ScalarProperty Name="OTHours" ColumnName="OTHours" />
+                <ScalarProperty Name="Hours" ColumnName="Hours" />
+                <ScalarProperty Name="PositionNo" ColumnName="PositionNo" />
+                <ScalarProperty Name="ConsultantIdFK" ColumnName="ConsultantIdFK" />
+                <ScalarProperty Name="ActiveConsultantId" ColumnName="ActiveConsultantId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceGenerations">
+            <EntityTypeMapping TypeName="HRACCDBModel.InvoiceGeneration">
+              <MappingFragment StoreEntitySet="InvoiceGeneration">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="InvoiceDueDate" ColumnName="InvoiceDueDate" />
+                <ScalarProperty Name="InvoiceMonth" ColumnName="InvoiceMonth" />
+                <ScalarProperty Name="InvoiceDate" ColumnName="InvoiceDate" />
+                <ScalarProperty Name="InvoiceGenerationId" ColumnName="InvoiceGenerationId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="InvoiceSubmissions">
+            <EntityTypeMapping TypeName="HRACCDBModel.InvoiceSubmission">
+              <MappingFragment StoreEntitySet="InvoiceSubmission">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="CustomerIdFK" ColumnName="CustomerIdFK" />
+                <ScalarProperty Name="InvoiceSubmissionId" ColumnName="InvoiceSubmissionId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="BalanceSheets">
+            <EntityTypeMapping TypeName="HRACCDBModel.BalanceSheet">
+              <MappingFragment StoreEntitySet="BalanceSheet">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="Balance" ColumnName="Balance" />
+                <ScalarProperty Name="PaymentReceived" ColumnName="PaymentReceived" />
+                <ScalarProperty Name="InvoiceAmount" ColumnName="InvoiceAmount" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Year" ColumnName="Year" />
+                <ScalarProperty Name="CustomerIdFK" ColumnName="CustomerIdFK" />
+                <ScalarProperty Name="BalanceSheetId" ColumnName="BalanceSheetId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          </EntityContainerMapping>
       </Mapping>
     </edmx:Mappings>
   </edmx:Runtime>

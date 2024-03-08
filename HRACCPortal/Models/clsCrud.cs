@@ -15,14 +15,19 @@ namespace HRACCPortal.Models
         public ConsultantModel consultantModel;
         public InvoiceModel invoiceModel;
         public InvoiceObjectModel invoiceObjectModel;
+        public InvoiceGenerationModel invoicegenerationModel;
+        public InvoiceGenerationObjectModel invoicegenerationObjectModel;
         public ConsultantPositionDetailsModel consultantPositionDetailsModel;
         public EmployerModel employerModel; //For Employer Table
+        /// </summary>
         public clsCrud()
         {
             customerModel = new CustomerModel();
             consultantModel = new ConsultantModel();
             invoiceModel = new InvoiceModel();
             invoiceObjectModel = new InvoiceObjectModel();
+            invoicegenerationModel = new InvoiceGenerationModel();
+            invoicegenerationObjectModel = new InvoiceGenerationObjectModel();
             consultantPositionDetailsModel = new ConsultantPositionDetailsModel();
             employerModel = new EmployerModel(); //For Employer Table
             entities = new HRACCDBEntities();
@@ -31,6 +36,7 @@ namespace HRACCPortal.Models
         public List<EmployerModel> EmployerList { get; set; } //For Employer Table
         public List<ConsultantModel> ConsultantList { get; set; }
         public List<ConsultantPositionDetailsModel> ConsultantPositionDetailsList { get; set; }
+        public List<InvoiceSubmissionModel> InvoiceSubmissionList { get; set; }
 
         public IEnumerable<SelectListItem> ddlPositionsList
         {
@@ -42,6 +48,20 @@ namespace HRACCPortal.Models
                                                     {
                                                         Text = value.PositionTitle,
                                                         Value = value.PositionIdPK.ToString(),
+                                                    };
+                return items;
+            }
+        }
+        public IEnumerable<SelectListItem> ddlInvoiceSubmissionList
+        {
+            get
+            {
+                var customer = entities.InvoiceSubmissions.AsEnumerable().ToList();
+                IEnumerable<SelectListItem> items = from value in customer
+                                                    select new SelectListItem
+                                                    {
+                                                        Text = value.Year,
+                                                        Value = value.InvoiceSubmissionId.ToString(),
                                                     };
                 return items;
             }
@@ -196,6 +216,7 @@ namespace HRACCPortal.Models
             return customerModel;
         }
 
+        
         #endregion
 
         #region Employer

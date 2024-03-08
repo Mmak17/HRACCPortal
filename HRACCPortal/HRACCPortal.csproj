@@ -185,13 +185,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="App_Start\Startup.Auth.cs" />
     <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\ActiveConsultantsController.cs" />
+    <Compile Include="Controllers\BalanceSheetController.cs" />
     <Compile Include="Controllers\ConsultantController.cs" />
     <Compile Include="Controllers\CustomerController.cs" />
     <Compile Include="Controllers\EmployerController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Controllers\InvoiceController.cs" />
+    <Compile Include="Controllers\InvoiceGenerationController.cs" />
+    <Compile Include="Controllers\InvoiceSubmissionController.cs" />
     <Compile Include="Controllers\ManageController.cs" />
+    <Compile Include="Controllers\PaymentsReceivedController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
+    <Compile Include="Controllers\QuaterlySalesReportController.cs" />
     <Compile Include="Edmx\HRACCDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -206,20 +212,28 @@
     </Compile>
     <Compile Include="Migrations\Configuration.cs" />
     <Compile Include="Models\AccountViewModels.cs" />
+    <Compile Include="Models\BalanceSheetModel.cs" />
     <Compile Include="Models\clsCrud.cs" />
     <Compile Include="Models\ConsultantModel.cs" />
     <Compile Include="Models\ConsultantPositionDetailsModel.cs" />
     <Compile Include="Models\CustomerModel.cs" />
     <Compile Include="Models\EmployerModel.cs" />
     <Compile Include="Models\IdentityModels.cs" />
+    <Compile Include="Models\InvoiceGenerationModel.cs" />
     <Compile Include="Models\InvoiceModel.cs" />
     <Compile Include="Models\InvoicePdfModel.cs" />
+    <Compile Include="Models\InvoiceSubmissionModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\ManageViewModels.cs" />
+    <Compile Include="Models\PaymentsReceivedModel.cs" />
     <Compile Include="Models\PositionModel.cs" />
+    <Compile Include="Models\QuaterlySalesReport.cs" />
+    <Compile Include="ObjectModel\BalanceSheetObjectModel.cs" />
     <Compile Include="ObjectModel\CustomerObjectModel.cs" />
     <Compile Include="ObjectModel\EmployerObjectModel.cs" />
+    <Compile Include="ObjectModel\InvoiceGenerationObjectModel.cs" />
     <Compile Include="ObjectModel\InvoiceObjectModel.cs" />
+    <Compile Include="ObjectModel\InvoiceSubmissionObjectModel.cs" />
     <Compile Include="ObjectModel\LoginObjectModel.cs" />
     <Compile Include="ObjectModel\PositionObjectModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -2487,6 +2501,13 @@
     <Content Include="Views\Employer\AddEmployer.cshtml" />
     <Content Include="Views\Employer\EditEmployer.cshtml" />
     <Content Include="Views\Employer\ViewEmployers.cshtml" />
+    <Content Include="Views\ActiveConsultants\ViewActiveConsultants.cshtml" />
+    <Content Include="Views\InvoiceGeneration\ViewInvoiceGeneration.cshtml" />
+    <Content Include="Views\InvoiceSubmission\ViewInvoiceSubmission.cshtml" />
+    <Content Include="Views\InvoiceSubmission\ShowInvoiceSubmission.cshtml" />
+    <Content Include="Views\BalanceSheet\ViewBalanceSheet.cshtml" />
+    <Content Include="Views\PaymentsReceived\ViewPaymentsReceived.cshtml" />
+    <Content Include="Views\QuaterlySalesReport\ViewQuaterlySalesReport.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />
