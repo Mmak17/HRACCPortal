@@ -116,9 +116,9 @@
                                                 <span class="badge badge-light-success fs-7 fw-bold">Active</span>
                                             }
                                             else
-                                            {
-                                                <span class="badge badge-light-danger fs-7 fw-bold">In-Active</span>
-                                            }
+                                           {
+                                               <span class="badge badge-light-danger fs-7 fw-bold">In-Active</span>
+                                            } 
                                         </td>
                                         <!--end::Date=-->
                                         <!--begin::Action=-->
@@ -474,8 +474,8 @@
                     $("input[name='EmployerFEID']").val(response.cl.EmployerFEID);
                     if (response.cl.isActive == true) {
                         $("#isActive").prop('checked', true);
-                    }
-                    if (response.cl.isActive == false) {
+                   }
+                   if (response.cl.isActive == false) {
                         $("#isActive").prop('checked', false);
                     }
 
