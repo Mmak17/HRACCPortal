@@ -180,12 +180,12 @@
                                             <span class="required">Fiscal Year Start</span>
                                         </label>
                                         <!--end::Label-->
-                                        <div class="input-group" id="kt_td_picker_date_only" data-td-target-input="nearest" data-td-target-toggle="nearest">
-                                            <input id="FiscalYearStart" name="FiscalYearStart" type="text" class="form-control form-control-solid" data-td-target="#kt_td_picker_date_only" readonly="readonly" />
-                                            <span class="input-group-text" data-td-target="#kt_td_picker_date_only" data-td-toggle="datetimepicker">
+                                        <div class="input-group" id="kt_td_picker_date_only_start" data-td-target-input="nearest" data-td-target-toggle="nearest">
+                                            <input id="FiscalYearStart" name="FiscalYearStart" type="text" class="form-control form-control-solid" data-td-target="#kt_td_picker_date_only_start" readonly="readonly" />
+                                            <span class="input-group-text" data-td-target="#kt_td_picker_date_only_start" data-td-toggle="datetimepicker">
                                                 <i class="fas fa-calendar"></i>
                                             </span>
-                                        </div>                                        
+                                        </div>
                                     </div>
                                 </div>
                                 <div class="row g-9 mb-7">
@@ -196,14 +196,15 @@
                                         </label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <div class="input-group" id="kt_td_picker_date_only" data-td-target-input="nearest" data-td-target-toggle="nearest">
-                                            <input id="FiscalYearEnd" name="FiscalYearEnd" type="text" class="form-control form-control-solid" data-td-target="#kt_td_picker_date_only" readonly="readonly" />
-                                            <span class="input-group-text" data-td-target="#kt_td_picker_date_only" data-td-toggle="datetimepicker">
+                                        <div class="input-group" id="kt_td_picker_date_only_end" data-td-target-input="nearest" data-td-target-toggle="nearest">
+                                            <input id="FiscalYearEnd" name="FiscalYearEnd" type="text" class="form-control form-control-solid" data-td-target="#kt_td_picker_date_only_end" readonly="readonly" />
+                                            <span class="input-group-text" data-td-target="#kt_td_picker_date_only_end" data-td-toggle="datetimepicker">
                                                 <i class="fas fa-calendar"></i>
                                             </span>
                                         </div>
                                         <!--end::Input-->
                                     </div>
+
                                     <div class="col-md-6 fv-row">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold mb-2">Fiscal Year Abbreviation</label>
@@ -227,7 +228,7 @@
                                     <div class="col-md-6 fv-row">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold mb-2">
-                                            <span>Overtime Rate</span> 
+                                            <span>Overtime Rate</span>
                                         </label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
@@ -335,6 +336,11 @@
     <script src="~/Content/assets/js/widgets.bundle.js"></script>
     <script src="~/Content/assets/js/custom/widgets.js"></script>
     <!--end::Custom Javascript-->
+    <script src="~/Scripts/bootstrap-datetimepicker.min.js"></script>
+    <script src="~/Scripts/jquery-3.7.1.min.js"></script>
+    <script src="~/Scripts/jquery-3.7.1.js"></script>
+    <script src="~/Scripts/moment.js"></script>
+    <script src="~/Scripts/moment.min.js"></script>
     <script>
         new tempusDominus.TempusDominus(document.getElementById("InactiveDate"), {
             display: {
@@ -454,6 +460,28 @@
             } else {
                 $("#divdate").hide();
             }
+        });
+        $(document).ready(function () {
+            $('#kt_td_picker_date_only_start').datetimepicker({
+                format: 'YYYY-MM-DD',
+                widgetPositioning: {
+                    horizontal: 'right'
+                }
+            });
+
+            $('#kt_td_picker_date_only_end').datetimepicker({
+                format: 'YYYY-MM-DD',
+                widgetPositioning: {
+                    horizontal: 'right'
+                },
+                useCurrent: false, // Do not use current date as default
+                minDate: $('#FiscalYearStart').val() // Set minDate based on start date value
+            });
+
+            // Update minDate of end date picker when start date is changed
+            $('#FiscalYearStart').on('change', function () {
+                $('#kt_td_picker_date_only_end').data("DateTimePicker").minDate($('#FiscalYearStart').val());
+            });
         });
     </script>
 }

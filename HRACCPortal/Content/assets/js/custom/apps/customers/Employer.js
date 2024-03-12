@@ -30,12 +30,12 @@ var KTModalEmployersAdd = function () {
 
                     'EmployerContactPhone': {
                         validators: {
-                            //phone: {
-                            //      country: function () {
-                            //          return form.querySelector('[name="US"]').value;
-                            //      },
-                            //       message: 'The value is not a valid phone number',
-                            //   },
+                            phone: {
+                                  country: function () {
+                                    return form.querySelector('[name="US"]').value;
+                                  },
+                                 message: 'The value is not a valid phone number',
+                               },
                             notEmpty: {
                                 message: 'Phone is required'
                             }

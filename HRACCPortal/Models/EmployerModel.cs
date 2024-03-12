@@ -24,4 +24,5 @@ namespace HRACCPortal.Models
             public string AddedBy { get; set; }
             public string UpdatedBy { get; set; }
         }
+   
     }
