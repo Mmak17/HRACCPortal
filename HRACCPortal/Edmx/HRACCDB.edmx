@@ -275,6 +275,21 @@
           <Property Name="DateUpdated" Type="nvarchar(max)" />
           <Property Name="UpdatedBy" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="QuaterlySalesReport">
+          <Key>
+            <PropertyRef Name="QuaterlySalesReportIdPK" />
+          </Key>
+          <Property Name="QuaterlySalesReportIdPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerIdFK" Type="int" Nullable="false" />
+          <Property Name="Quarter" Type="nvarchar(max)" />
+          <Property Name="Month" Type="nvarchar(max)" />
+          <Property Name="ConsultantName" Type="nvarchar(max)" />
+          <Property Name="InvoiceAmount" Type="nvarchar(max)" />
+          <Property Name="DateAdded" Type="nvarchar(max)" />
+          <Property Name="DateUpdated" Type="nvarchar(max)" />
+          <Property Name="AddedBy" Type="nvarchar(max)" />
+          <Property Name="UpdatedBy" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="Reconcile">
           <Key>
             <PropertyRef Name="ReconcileIdPK" />
@@ -349,6 +364,7 @@
           <EntitySet Name="InvoiceSubmission" EntityType="Self.InvoiceSubmission" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PositionRate" EntityType="Self.PositionRate" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="QuaterlySalesReport" EntityType="Self.QuaterlySalesReport" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reconcile" EntityType="Self.Reconcile" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="SubContractor" EntityType="Self.SubContractor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
@@ -491,6 +507,7 @@
           </AssociationSet>
           <EntitySet Name="BalanceSheets" EntityType="HRACCDBModel.BalanceSheet" />
           <EntitySet Name="SubContractors" EntityType="HRACCDBModel.SubContractor" />
+          <EntitySet Name="QuaterlySalesReports" EntityType="HRACCDBModel.QuaterlySalesReport" />
           </EntityContainer>
         <EntityType Name="Position">
           <Key>
@@ -732,6 +749,21 @@
           <Property Name="AddedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="isActive" Type="Boolean" Nullable="false" />
+        </EntityType>
+        <EntityType Name="QuaterlySalesReport">
+          <Key>
+            <PropertyRef Name="QuaterlySalesReportIdPK" />
+          </Key>
+          <Property Name="QuaterlySalesReportIdPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerIdFK" Type="Int32" Nullable="false" />
+          <Property Name="Quarter" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="Month" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="ConsultantName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceAmount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateAdded" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1070,6 +1102,22 @@
                 <ScalarProperty Name="SubContractorContactPhone" ColumnName="SubContractorContactPhone" />
                 <ScalarProperty Name="SubContractorName" ColumnName="SubContractorName" />
                 <ScalarProperty Name="SubContractorIdPK" ColumnName="SubContractorIdPK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="QuaterlySalesReports">
+            <EntityTypeMapping TypeName="HRACCDBModel.QuaterlySalesReport">
+              <MappingFragment StoreEntitySet="QuaterlySalesReport">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="InvoiceAmount" ColumnName="InvoiceAmount" />
+                <ScalarProperty Name="ConsultantName" ColumnName="ConsultantName" />
+                <ScalarProperty Name="Month" ColumnName="Month" />
+                <ScalarProperty Name="Quarter" ColumnName="Quarter" />
+                <ScalarProperty Name="CustomerIdFK" ColumnName="CustomerIdFK" />
+                <ScalarProperty Name="QuaterlySalesReportIdPK" ColumnName="QuaterlySalesReportIdPK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
