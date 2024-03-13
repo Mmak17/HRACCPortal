@@ -10,7 +10,6 @@ namespace HRACCPortal.Controllers
 {
     public class SubContractorController : Controller
     {
-        // GET: SubContractor
         public HRACCDBEntities entities;
         clsCrud cls;
         public SubContractorController()
@@ -28,14 +27,14 @@ namespace HRACCPortal.Controllers
             return View();
         }
         [HttpPost]
-        public ActionResult AddSubContractor(SubContractorModel subContractor)
+        public ActionResult AddSubContractor(SubContractorModel subcontractor)
         {
 
 
             string message = "";
             try
             {
-                message = cls.AddSubContractor(subContractor);
+                message = cls.AddSubContractor(subcontractor);
             }
             catch (Exception e)
             {
@@ -49,14 +48,14 @@ namespace HRACCPortal.Controllers
 
         public ActionResult ViewSubContractors()
         {
-            cls.GetSubControllers();
+            cls.GetSubContractors();
             return View(cls);
         }
         public ActionResult EditSubContractor(int id)
         {
-            CustomerModel cl = cls.GetSubContractorById(id);
+            SubContractorModel cl = cls.GetSubContractorById(id);
             return Json(new { cl = cl, JsonRequestBehavior.AllowGet });
         }
+
     }
-}
 }

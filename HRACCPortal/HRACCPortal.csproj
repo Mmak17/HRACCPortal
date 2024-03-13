@@ -267,6 +267,7 @@
     <Content Include="Content\assets\js\custom\apps\customers\Employer.js" />
     <Content Include="Content\assets\js\custom\apps\customers\list\export.js" />
     <Content Include="Content\assets\js\custom\apps\customers\list\list.js" />
+    <Content Include="Content\assets\js\custom\apps\customers\SubContractor.js" />
     <Content Include="Content\assets\js\custom\apps\customers\update.js" />
     <Content Include="Content\assets\js\custom\apps\customers\view\add-payment.js" />
     <Content Include="Content\assets\js\custom\apps\customers\view\adjust-balance.js" />
@@ -2521,6 +2522,9 @@
     <Content Include="Views\QuaterlySalesReport\ViewQuaterlySalesReport.cshtml" />
     <Content Include="Scripts\moment.min.js.map" />
     <Content Include="Scripts\moment-with-locales.min.js.map" />
+    <Content Include="Views\SubContractor\ViewSubContractors.cshtml" />
+    <Content Include="Views\SubContractor\AddSubContractor.cshtml" />
+    <Content Include="Views\SubContractor\EditSubContractor.cshtml" />
     <None Include="_bin_deployableAssemblies\x86\sqlcese40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceqp40.dll" />
     <None Include="_bin_deployableAssemblies\x86\sqlceme40.dll" />

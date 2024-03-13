@@ -17,11 +17,10 @@ namespace HRACCPortal.Models
         public string SubContractorContactState { get; set; }
         public string SubContractorContactZip { get; set; }
         public string SubContractorTerm { get; set; }
-        public bool isActive { get; set; }
+         public bool isActive { get; set; }
         public string DateAdded { get; set; }
         public string DateUpdated { get; set; }
         public string AddedBy { get; set; }
         public string UpdatedBy { get; set; }
-
     }
 }

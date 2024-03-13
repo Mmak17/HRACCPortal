@@ -4,7 +4,7 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="25bceef0cad044069b2667b8ca6d5198" Name="Diagram1">
+      <Diagram DiagramId="25bceef0cad044069b2667b8ca6d5198" Name="Diagram1" ZoomLevel="99">
         <EntityTypeShape EntityType="HRACCDBModel.Company" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HRACCDBModel.Consultant" Width="1.5" PointX="2.75" PointY="0.75" IsExpanded="true" />
         <EntityTypeShape EntityType="HRACCDBModel.Customer" Width="1.5" PointX="4.75" PointY="0.75" IsExpanded="true" />
@@ -24,7 +24,7 @@
         <EntityTypeShape EntityType="HRACCDBModel.InvoiceSubmission" Width="1.5" PointX="11.375" PointY="8.75" />
         <AssociationConnector Association="HRACCDBModel.FK_InvoiceGeneration_InvoiceGeneration" />
         <EntityTypeShape EntityType="HRACCDBModel.BalanceSheet" Width="1.5" PointX="0.75" PointY="12.75" />
-        <EntityTypeShape EntityType="HRACCDBModel.Sub_Contractor" Width="1.5" PointX="5.375" PointY="12.75" />
+        <EntityTypeShape EntityType="HRACCDBModel.SubContractor" Width="1.5" PointX="5.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>

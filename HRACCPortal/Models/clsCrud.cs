@@ -19,6 +19,7 @@ namespace HRACCPortal.Models
         public InvoiceGenerationObjectModel invoicegenerationObjectModel;
         public ConsultantPositionDetailsModel consultantPositionDetailsModel;
         public EmployerModel employerModel; //For Employer Table
+        public SubContractorModel subcontractorModel; //for subcontractor
         /// </summary>
         public clsCrud()
         {
@@ -30,10 +31,12 @@ namespace HRACCPortal.Models
             invoicegenerationObjectModel = new InvoiceGenerationObjectModel();
             consultantPositionDetailsModel = new ConsultantPositionDetailsModel();
             employerModel = new EmployerModel(); //For Employer Table
+            subcontractorModel = new SubContractorModel(); //for subcontractor
             entities = new HRACCDBEntities();
         }
         public List<CustomerModel> CustomerList { get; set; }
         public List<EmployerModel> EmployerList { get; set; } //For Employer Table
+        public List<SubContractorModel> SubContractorList { get; set; } // for subcontractor
         public List<ConsultantModel> ConsultantList { get; set; }
         public List<ConsultantPositionDetailsModel> ConsultantPositionDetailsList { get; set; }
         public List<InvoiceSubmissionModel> InvoiceSubmissionList { get; set; }
@@ -340,6 +343,130 @@ namespace HRACCPortal.Models
             employerModel.isActive = employer.isActive;
             return employerModel;
         }
+
+        #endregion
+
+        #region SubContractor
+        public string AddSubContractor(SubContractorModel subcontractor)
+        {
+            if (subcontractor.SubContractorIdPK > 0)
+            {
+                var subcontractorModel = entities.SubContractors.Where(x => x.SubContractorIdPK == subcontractor.SubContractorIdPK).FirstOrDefault();
+                subcontractorModel.AddedBy = "Admin";
+                subcontractorModel.SubContractorContactAddress1 = subcontractor.SubContractorContactAddress1;
+                subcontractorModel.SubContractorContactAddress2 = subcontractor.SubContractorContactAddress2;
+                subcontractorModel.SubContractorContactCity = subcontractor.SubContractorContactCity;
+                subcontractorModel.SubContractorContactEmail = subcontractor.SubContractorContactEmail;
+                subcontractorModel.SubContractorContactPhone = subcontractor.SubContractorContactPhone;
+                subcontractorModel.SubContractorContactState = subcontractor.SubContractorContactState;
+                subcontractorModel.SubContractorContactZip = subcontractor.SubContractorContactZip;
+                subcontractorModel.SubContractorName = subcontractor.SubContractorName;
+                if (!string.IsNullOrEmpty(subcontractor.SubContractorName))
+                {
+                    subcontractorModel.SubContractorTerm = subcontractor.SubContractorTerm;
+                }
+                else
+                {
+                    subcontractorModel.SubContractorTerm = "30";
+                }
+                subcontractorModel.DateUpdated = DateTime.Now.ToString("MM/dd/yyyy").Replace("-", "/");
+                subcontractorModel.UpdatedBy = "ADMIN";
+                subcontractorModel.SubContractorIdPK = subcontractor.SubContractorIdPK;
+                subcontractorModel.isActive = subcontractor.isActive;
+                int i = entities.SaveChanges();
+                if (i > 0)
+                {
+                    return "updated";
+                }
+                else
+                {
+                    return "fail";
+                }
+            }
+            else
+            {
+                var cons = entities.Consultants.Where(x => x.Email == subcontractor.SubContractorContactEmail).ToList();
+                if (cons.Count > 0)
+                {
+                    return "Email already exist";
+                }
+
+                SubContractor scust = new SubContractor
+                {
+                    AddedBy = subcontractor.AddedBy,
+                    SubContractorContactAddress1 = subcontractor.SubContractorContactAddress1,
+                    SubContractorContactAddress2 = subcontractor.SubContractorContactAddress2,
+                    SubContractorContactCity = subcontractor.SubContractorContactCity,
+                    SubContractorContactEmail = subcontractor.SubContractorContactEmail,
+                    SubContractorContactPhone = subcontractor.SubContractorContactPhone,
+                    SubContractorContactState = subcontractor.SubContractorContactState,
+                    SubContractorContactZip = subcontractor.SubContractorContactZip,
+                    SubContractorName = subcontractor.SubContractorName,
+                    SubContractorTerm = subcontractor.SubContractorTerm,
+                    DateAdded = DateTime.Now.ToString("MM/dd/yyyy").Replace("-", "/"),
+                    DateUpdated = DateTime.Now.ToString("MM/dd/yyyy").Replace("-", "/"),
+                    UpdatedBy = "Admin",
+                    isActive = subcontractor.isActive
+                };
+
+                entities.SubContractors.AddObject(scust);
+                int i = entities.SaveChanges();
+                if (i > 0)
+                {
+                    return "success";
+                }
+                else
+                {
+                    return "fail";
+                }
+            }
+        }
+        public void GetSubContractors()
+        {
+            SubContractorList = (from g in entities.SubContractors
+                                 select g
+                               ).AsEnumerable().Select(subcontractor => new SubContractorModel
+                               {
+                                   AddedBy = subcontractor.AddedBy,
+                                   SubContractorContactAddress1 = subcontractor.SubContractorContactAddress1,
+                                   SubContractorContactAddress2 = subcontractor.SubContractorContactAddress2,
+                                   SubContractorContactCity = subcontractor.SubContractorContactCity,
+                                   SubContractorContactEmail = subcontractor.SubContractorContactEmail,
+                                   SubContractorContactPhone = subcontractor.SubContractorContactPhone,
+                                   SubContractorContactState = subcontractor.SubContractorContactState,
+                                   SubContractorContactZip = subcontractor.SubContractorContactZip,
+                                   SubContractorName = subcontractor.SubContractorName,
+                                   SubContractorTerm = subcontractor.SubContractorTerm,
+                                   DateAdded = subcontractor.DateAdded,
+                                   // DateUpdated = Convert.ToDateTime(customer.DateUpdated).ToString("MMM,dd, yyyy"),
+                                   DateUpdated = DateTime.Now.ToString("MMM,dd,yyyy"),
+                                   // DateUpdated = customer.DateUpdated,
+                                   UpdatedBy = subcontractor.UpdatedBy,
+                                   SubContractorIdPK = subcontractor.SubContractorIdPK,
+                                   isActive = subcontractor.isActive,
+                               }).ToList();
+        }
+        public SubContractorModel GetSubContractorById(int id)
+        {
+            var subcontractor = entities.SubContractors.Where(x => x.SubContractorIdPK == id).FirstOrDefault();
+            subcontractorModel.AddedBy = subcontractor.AddedBy;
+            subcontractorModel.SubContractorContactAddress1 = subcontractor.SubContractorContactAddress1;
+            subcontractorModel.SubContractorContactAddress2 = subcontractor.SubContractorContactAddress2;
+            subcontractorModel.SubContractorContactCity = subcontractor.SubContractorContactCity;
+            subcontractorModel.SubContractorContactEmail = subcontractor.SubContractorContactEmail;
+            subcontractorModel.SubContractorContactPhone = subcontractor.SubContractorContactPhone;
+            subcontractorModel.SubContractorContactState = subcontractor.SubContractorContactState;
+            subcontractorModel.SubContractorContactZip = subcontractor.SubContractorContactZip;
+            subcontractorModel.SubContractorName = subcontractor.SubContractorName;
+            subcontractorModel.SubContractorTerm = subcontractor.SubContractorTerm;
+            subcontractorModel.DateAdded = subcontractor.DateAdded;
+            subcontractorModel.DateUpdated = subcontractor.DateUpdated;
+            subcontractorModel.UpdatedBy = subcontractor.UpdatedBy;
+            subcontractorModel.SubContractorIdPK = subcontractor.SubContractorIdPK;
+            subcontractorModel.isActive = subcontractor.isActive;
+            return subcontractorModel;
+        }
+
 
         #endregion
 

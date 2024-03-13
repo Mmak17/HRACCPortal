@@ -347,18 +347,18 @@ namespace HRACCPortal.Edmx
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<Sub_Contractor> Sub_Contractor
+        public ObjectSet<SubContractor> SubContractors
         {
             get
             {
-                if ((_Sub_Contractor == null))
+                if ((_SubContractors == null))
                 {
-                    _Sub_Contractor = base.CreateObjectSet<Sub_Contractor>("Sub_Contractor");
+                    _SubContractors = base.CreateObjectSet<SubContractor>("SubContractors");
                 }
-                return _Sub_Contractor;
+                return _SubContractors;
             }
         }
-        private ObjectSet<Sub_Contractor> _Sub_Contractor;
+        private ObjectSet<SubContractor> _SubContractors;
 
         #endregion
 
@@ -501,11 +501,11 @@ namespace HRACCPortal.Edmx
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the Sub_Contractor EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// Deprecated Method for adding a new object to the SubContractors EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
-        public void AddToSub_Contractor(Sub_Contractor sub_Contractor)
+        public void AddToSubContractors(SubContractor subContractor)
         {
-            base.AddObject("Sub_Contractor", sub_Contractor);
+            base.AddObject("SubContractors", subContractor);
         }
 
         #endregion
@@ -6117,22 +6117,24 @@ namespace HRACCPortal.Edmx
     /// <summary>
     /// No Metadata Documentation available.
     /// </summary>
-    [EdmEntityTypeAttribute(NamespaceName="HRACCDBModel", Name="Sub_Contractor")]
+    [EdmEntityTypeAttribute(NamespaceName="HRACCDBModel", Name="SubContractor")]
     [Serializable()]
     [DataContractAttribute(IsReference=true)]
-    public partial class Sub_Contractor : EntityObject
+    public partial class SubContractor : EntityObject
     {
         #region Factory Method
     
         /// <summary>
-        /// Create a new Sub_Contractor object.
+        /// Create a new SubContractor object.
         /// </summary>
         /// <param name="subContractorIdPK">Initial value of the SubContractorIdPK property.</param>
-        public static Sub_Contractor CreateSub_Contractor(global::System.Int32 subContractorIdPK)
+        /// <param name="isActive">Initial value of the isActive property.</param>
+        public static SubContractor CreateSubContractor(global::System.Int32 subContractorIdPK, global::System.Boolean isActive)
         {
-            Sub_Contractor sub_Contractor = new Sub_Contractor();
-            sub_Contractor.SubContractorIdPK = subContractorIdPK;
-            return sub_Contractor;
+            SubContractor subContractor = new SubContractor();
+            subContractor.SubContractorIdPK = subContractorIdPK;
+            subContractor.isActive = isActive;
+            return subContractor;
         }
 
         #endregion
@@ -6363,6 +6365,30 @@ namespace HRACCPortal.Edmx
         /// </summary>
         [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
         [DataMemberAttribute()]
+        public global::System.String SubContractorTerm
+        {
+            get
+            {
+                return _SubContractorTerm;
+            }
+            set
+            {
+                OnSubContractorTermChanging(value);
+                ReportPropertyChanging("SubContractorTerm");
+                _SubContractorTerm = StructuralObject.SetValidValue(value, true, "SubContractorTerm");
+                ReportPropertyChanged("SubContractorTerm");
+                OnSubContractorTermChanged();
+            }
+        }
+        private global::System.String _SubContractorTerm;
+        partial void OnSubContractorTermChanging(global::System.String value);
+        partial void OnSubContractorTermChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
         public global::System.String DateAdded
         {
             get
@@ -6457,9 +6483,9 @@ namespace HRACCPortal.Edmx
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
         [DataMemberAttribute()]
-        public global::System.String isActive
+        public global::System.Boolean isActive
         {
             get
             {
@@ -6469,38 +6495,14 @@ namespace HRACCPortal.Edmx
             {
                 OnisActiveChanging(value);
                 ReportPropertyChanging("isActive");
-                _isActive = StructuralObject.SetValidValue(value, true, "isActive");
+                _isActive = StructuralObject.SetValidValue(value, "isActive");
                 ReportPropertyChanged("isActive");
                 OnisActiveChanged();
             }
         }
-        private global::System.String _isActive;
-        partial void OnisActiveChanging(global::System.String value);
+        private global::System.Boolean _isActive;
+        partial void OnisActiveChanging(global::System.Boolean value);
         partial void OnisActiveChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String SubContractorTerm
-        {
-            get
-            {
-                return _SubContractorTerm;
-            }
-            set
-            {
-                OnSubContractorTermChanging(value);
-                ReportPropertyChanging("SubContractorTerm");
-                _SubContractorTerm = StructuralObject.SetValidValue(value, true, "SubContractorTerm");
-                ReportPropertyChanged("SubContractorTerm");
-                OnSubContractorTermChanged();
-            }
-        }
-        private global::System.String _SubContractorTerm;
-        partial void OnSubContractorTermChanging(global::System.String value);
-        partial void OnSubContractorTermChanged();
 
         #endregion
 
