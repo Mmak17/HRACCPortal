@@ -198,7 +198,7 @@
     <Compile Include="Controllers\PaymentsReceivedController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\QuaterlySalesReportController.cs" />
-    <Compile Include="Controllers\SubContractorControllercs.cs" />
+    <Compile Include="Controllers\SubContractorController.cs" />
     <Compile Include="Edmx\HRACCDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
