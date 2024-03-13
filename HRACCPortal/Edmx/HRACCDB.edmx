@@ -289,6 +289,26 @@
           <Property Name="AddedBy" Type="nvarchar(max)" />
           <Property Name="UpdatedBy" Type="nvarchar(max)" />
         </EntityType>
+        <EntityType Name="Sub_Contractor">
+          <Key>
+            <PropertyRef Name="SubContractorIdPK" />
+          </Key>
+          <Property Name="SubContractorIdPK" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="SubContractorName" Type="nvarchar(max)" />
+          <Property Name="SubContractorContactPhone" Type="nvarchar(max)" />
+          <Property Name="SubContractorContactEmail" Type="nvarchar(max)" />
+          <Property Name="SubContractorContactAddress1" Type="nvarchar(max)" />
+          <Property Name="SubContractorContactAddress2" Type="nvarchar(max)" />
+          <Property Name="SubContractorContactCity" Type="nvarchar(max)" />
+          <Property Name="SubContractorContactState" Type="nvarchar(max)" />
+          <Property Name="SubContractorContactZip" Type="nvarchar(max)" />
+          <Property Name="DateAdded" Type="nvarchar(max)" />
+          <Property Name="DateUpdated" Type="nvarchar(max)" />
+          <Property Name="AddedBy" Type="nvarchar(max)" />
+          <Property Name="UpdatedBy" Type="nvarchar(max)" />
+          <Property Name="isActive" Type="nvarchar(max)" />
+          <Property Name="SubContractorTerm" Type="nvarchar(max)" />
+        </EntityType>
         <EntityType Name="UserDetails">
           <Key>
             <PropertyRef Name="UserId" />
@@ -330,6 +350,7 @@
           <EntitySet Name="Position" EntityType="Self.Position" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="PositionRate" EntityType="Self.PositionRate" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="Reconcile" EntityType="Self.Reconcile" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Sub_Contractor" EntityType="Self.Sub_Contractor" Schema="dbo" store:Type="Tables" />
           <EntitySet Name="UserDetails" EntityType="Self.UserDetails" Schema="dbo" store:Type="Tables" />
           <AssociationSet Name="FK_InvoiceGeneration_InvoiceGeneration" Association="Self.FK_InvoiceGeneration_InvoiceGeneration">
             <End Role="InvoiceGeneration" EntitySet="InvoiceGeneration" />
@@ -469,6 +490,7 @@
             <End Role="InvoiceGeneration1" EntitySet="InvoiceGenerations" />
           </AssociationSet>
           <EntitySet Name="BalanceSheets" EntityType="HRACCDBModel.BalanceSheet" />
+          <EntitySet Name="Sub_Contractor" EntityType="HRACCDBModel.Sub_Contractor" />
           </EntityContainer>
         <EntityType Name="Position">
           <Key>
@@ -690,6 +712,26 @@
           <Property Name="DateUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AddedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="Sub_Contractor">
+          <Key>
+            <PropertyRef Name="SubContractorIdPK" />
+          </Key>
+          <Property Name="SubContractorIdPK" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="SubContractorName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubContractorContactPhone" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubContractorContactEmail" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubContractorContactAddress1" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubContractorContactAddress2" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubContractorContactCity" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubContractorContactState" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubContractorContactZip" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateAdded" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="isActive" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="SubContractorTerm" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
         </Schema>
     </edmx:ConceptualModels>
@@ -1007,6 +1049,27 @@
                 <ScalarProperty Name="Year" ColumnName="Year" />
                 <ScalarProperty Name="CustomerIdFK" ColumnName="CustomerIdFK" />
                 <ScalarProperty Name="BalanceSheetId" ColumnName="BalanceSheetId" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Sub_Contractor">
+            <EntityTypeMapping TypeName="HRACCDBModel.Sub_Contractor">
+              <MappingFragment StoreEntitySet="Sub_Contractor">
+                <ScalarProperty Name="SubContractorTerm" ColumnName="SubContractorTerm" />
+                <ScalarProperty Name="isActive" ColumnName="isActive" />
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="SubContractorContactZip" ColumnName="SubContractorContactZip" />
+                <ScalarProperty Name="SubContractorContactState" ColumnName="SubContractorContactState" />
+                <ScalarProperty Name="SubContractorContactCity" ColumnName="SubContractorContactCity" />
+                <ScalarProperty Name="SubContractorContactAddress2" ColumnName="SubContractorContactAddress2" />
+                <ScalarProperty Name="SubContractorContactAddress1" ColumnName="SubContractorContactAddress1" />
+                <ScalarProperty Name="SubContractorContactEmail" ColumnName="SubContractorContactEmail" />
+                <ScalarProperty Name="SubContractorContactPhone" ColumnName="SubContractorContactPhone" />
+                <ScalarProperty Name="SubContractorName" ColumnName="SubContractorName" />
+                <ScalarProperty Name="SubContractorIdPK" ColumnName="SubContractorIdPK" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

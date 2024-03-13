@@ -343,6 +343,22 @@ namespace HRACCPortal.Edmx
             }
         }
         private ObjectSet<BalanceSheet> _BalanceSheets;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<Sub_Contractor> Sub_Contractor
+        {
+            get
+            {
+                if ((_Sub_Contractor == null))
+                {
+                    _Sub_Contractor = base.CreateObjectSet<Sub_Contractor>("Sub_Contractor");
+                }
+                return _Sub_Contractor;
+            }
+        }
+        private ObjectSet<Sub_Contractor> _Sub_Contractor;
 
         #endregion
 
@@ -482,6 +498,14 @@ namespace HRACCPortal.Edmx
         public void AddToBalanceSheets(BalanceSheet balanceSheet)
         {
             base.AddObject("BalanceSheets", balanceSheet);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the Sub_Contractor EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToSub_Contractor(Sub_Contractor sub_Contractor)
+        {
+            base.AddObject("Sub_Contractor", sub_Contractor);
         }
 
         #endregion
@@ -6085,6 +6109,398 @@ namespace HRACCPortal.Edmx
         private global::System.String _UpdatedBy;
         partial void OnUpdatedByChanging(global::System.String value);
         partial void OnUpdatedByChanged();
+
+        #endregion
+
+    }
+    
+    /// <summary>
+    /// No Metadata Documentation available.
+    /// </summary>
+    [EdmEntityTypeAttribute(NamespaceName="HRACCDBModel", Name="Sub_Contractor")]
+    [Serializable()]
+    [DataContractAttribute(IsReference=true)]
+    public partial class Sub_Contractor : EntityObject
+    {
+        #region Factory Method
+    
+        /// <summary>
+        /// Create a new Sub_Contractor object.
+        /// </summary>
+        /// <param name="subContractorIdPK">Initial value of the SubContractorIdPK property.</param>
+        public static Sub_Contractor CreateSub_Contractor(global::System.Int32 subContractorIdPK)
+        {
+            Sub_Contractor sub_Contractor = new Sub_Contractor();
+            sub_Contractor.SubContractorIdPK = subContractorIdPK;
+            return sub_Contractor;
+        }
+
+        #endregion
+
+        #region Simple Properties
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=true, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 SubContractorIdPK
+        {
+            get
+            {
+                return _SubContractorIdPK;
+            }
+            set
+            {
+                if (_SubContractorIdPK != value)
+                {
+                    OnSubContractorIdPKChanging(value);
+                    ReportPropertyChanging("SubContractorIdPK");
+                    _SubContractorIdPK = StructuralObject.SetValidValue(value, "SubContractorIdPK");
+                    ReportPropertyChanged("SubContractorIdPK");
+                    OnSubContractorIdPKChanged();
+                }
+            }
+        }
+        private global::System.Int32 _SubContractorIdPK;
+        partial void OnSubContractorIdPKChanging(global::System.Int32 value);
+        partial void OnSubContractorIdPKChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SubContractorName
+        {
+            get
+            {
+                return _SubContractorName;
+            }
+            set
+            {
+                OnSubContractorNameChanging(value);
+                ReportPropertyChanging("SubContractorName");
+                _SubContractorName = StructuralObject.SetValidValue(value, true, "SubContractorName");
+                ReportPropertyChanged("SubContractorName");
+                OnSubContractorNameChanged();
+            }
+        }
+        private global::System.String _SubContractorName;
+        partial void OnSubContractorNameChanging(global::System.String value);
+        partial void OnSubContractorNameChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SubContractorContactPhone
+        {
+            get
+            {
+                return _SubContractorContactPhone;
+            }
+            set
+            {
+                OnSubContractorContactPhoneChanging(value);
+                ReportPropertyChanging("SubContractorContactPhone");
+                _SubContractorContactPhone = StructuralObject.SetValidValue(value, true, "SubContractorContactPhone");
+                ReportPropertyChanged("SubContractorContactPhone");
+                OnSubContractorContactPhoneChanged();
+            }
+        }
+        private global::System.String _SubContractorContactPhone;
+        partial void OnSubContractorContactPhoneChanging(global::System.String value);
+        partial void OnSubContractorContactPhoneChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SubContractorContactEmail
+        {
+            get
+            {
+                return _SubContractorContactEmail;
+            }
+            set
+            {
+                OnSubContractorContactEmailChanging(value);
+                ReportPropertyChanging("SubContractorContactEmail");
+                _SubContractorContactEmail = StructuralObject.SetValidValue(value, true, "SubContractorContactEmail");
+                ReportPropertyChanged("SubContractorContactEmail");
+                OnSubContractorContactEmailChanged();
+            }
+        }
+        private global::System.String _SubContractorContactEmail;
+        partial void OnSubContractorContactEmailChanging(global::System.String value);
+        partial void OnSubContractorContactEmailChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SubContractorContactAddress1
+        {
+            get
+            {
+                return _SubContractorContactAddress1;
+            }
+            set
+            {
+                OnSubContractorContactAddress1Changing(value);
+                ReportPropertyChanging("SubContractorContactAddress1");
+                _SubContractorContactAddress1 = StructuralObject.SetValidValue(value, true, "SubContractorContactAddress1");
+                ReportPropertyChanged("SubContractorContactAddress1");
+                OnSubContractorContactAddress1Changed();
+            }
+        }
+        private global::System.String _SubContractorContactAddress1;
+        partial void OnSubContractorContactAddress1Changing(global::System.String value);
+        partial void OnSubContractorContactAddress1Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SubContractorContactAddress2
+        {
+            get
+            {
+                return _SubContractorContactAddress2;
+            }
+            set
+            {
+                OnSubContractorContactAddress2Changing(value);
+                ReportPropertyChanging("SubContractorContactAddress2");
+                _SubContractorContactAddress2 = StructuralObject.SetValidValue(value, true, "SubContractorContactAddress2");
+                ReportPropertyChanged("SubContractorContactAddress2");
+                OnSubContractorContactAddress2Changed();
+            }
+        }
+        private global::System.String _SubContractorContactAddress2;
+        partial void OnSubContractorContactAddress2Changing(global::System.String value);
+        partial void OnSubContractorContactAddress2Changed();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SubContractorContactCity
+        {
+            get
+            {
+                return _SubContractorContactCity;
+            }
+            set
+            {
+                OnSubContractorContactCityChanging(value);
+                ReportPropertyChanging("SubContractorContactCity");
+                _SubContractorContactCity = StructuralObject.SetValidValue(value, true, "SubContractorContactCity");
+                ReportPropertyChanged("SubContractorContactCity");
+                OnSubContractorContactCityChanged();
+            }
+        }
+        private global::System.String _SubContractorContactCity;
+        partial void OnSubContractorContactCityChanging(global::System.String value);
+        partial void OnSubContractorContactCityChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SubContractorContactState
+        {
+            get
+            {
+                return _SubContractorContactState;
+            }
+            set
+            {
+                OnSubContractorContactStateChanging(value);
+                ReportPropertyChanging("SubContractorContactState");
+                _SubContractorContactState = StructuralObject.SetValidValue(value, true, "SubContractorContactState");
+                ReportPropertyChanged("SubContractorContactState");
+                OnSubContractorContactStateChanged();
+            }
+        }
+        private global::System.String _SubContractorContactState;
+        partial void OnSubContractorContactStateChanging(global::System.String value);
+        partial void OnSubContractorContactStateChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SubContractorContactZip
+        {
+            get
+            {
+                return _SubContractorContactZip;
+            }
+            set
+            {
+                OnSubContractorContactZipChanging(value);
+                ReportPropertyChanging("SubContractorContactZip");
+                _SubContractorContactZip = StructuralObject.SetValidValue(value, true, "SubContractorContactZip");
+                ReportPropertyChanged("SubContractorContactZip");
+                OnSubContractorContactZipChanged();
+            }
+        }
+        private global::System.String _SubContractorContactZip;
+        partial void OnSubContractorContactZipChanging(global::System.String value);
+        partial void OnSubContractorContactZipChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DateAdded
+        {
+            get
+            {
+                return _DateAdded;
+            }
+            set
+            {
+                OnDateAddedChanging(value);
+                ReportPropertyChanging("DateAdded");
+                _DateAdded = StructuralObject.SetValidValue(value, true, "DateAdded");
+                ReportPropertyChanged("DateAdded");
+                OnDateAddedChanged();
+            }
+        }
+        private global::System.String _DateAdded;
+        partial void OnDateAddedChanging(global::System.String value);
+        partial void OnDateAddedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String DateUpdated
+        {
+            get
+            {
+                return _DateUpdated;
+            }
+            set
+            {
+                OnDateUpdatedChanging(value);
+                ReportPropertyChanging("DateUpdated");
+                _DateUpdated = StructuralObject.SetValidValue(value, true, "DateUpdated");
+                ReportPropertyChanged("DateUpdated");
+                OnDateUpdatedChanged();
+            }
+        }
+        private global::System.String _DateUpdated;
+        partial void OnDateUpdatedChanging(global::System.String value);
+        partial void OnDateUpdatedChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String AddedBy
+        {
+            get
+            {
+                return _AddedBy;
+            }
+            set
+            {
+                OnAddedByChanging(value);
+                ReportPropertyChanging("AddedBy");
+                _AddedBy = StructuralObject.SetValidValue(value, true, "AddedBy");
+                ReportPropertyChanged("AddedBy");
+                OnAddedByChanged();
+            }
+        }
+        private global::System.String _AddedBy;
+        partial void OnAddedByChanging(global::System.String value);
+        partial void OnAddedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String UpdatedBy
+        {
+            get
+            {
+                return _UpdatedBy;
+            }
+            set
+            {
+                OnUpdatedByChanging(value);
+                ReportPropertyChanging("UpdatedBy");
+                _UpdatedBy = StructuralObject.SetValidValue(value, true, "UpdatedBy");
+                ReportPropertyChanged("UpdatedBy");
+                OnUpdatedByChanged();
+            }
+        }
+        private global::System.String _UpdatedBy;
+        partial void OnUpdatedByChanging(global::System.String value);
+        partial void OnUpdatedByChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String isActive
+        {
+            get
+            {
+                return _isActive;
+            }
+            set
+            {
+                OnisActiveChanging(value);
+                ReportPropertyChanging("isActive");
+                _isActive = StructuralObject.SetValidValue(value, true, "isActive");
+                ReportPropertyChanged("isActive");
+                OnisActiveChanged();
+            }
+        }
+        private global::System.String _isActive;
+        partial void OnisActiveChanging(global::System.String value);
+        partial void OnisActiveChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
+        [DataMemberAttribute()]
+        public global::System.String SubContractorTerm
+        {
+            get
+            {
+                return _SubContractorTerm;
+            }
+            set
+            {
+                OnSubContractorTermChanging(value);
+                ReportPropertyChanging("SubContractorTerm");
+                _SubContractorTerm = StructuralObject.SetValidValue(value, true, "SubContractorTerm");
+                ReportPropertyChanged("SubContractorTerm");
+                OnSubContractorTermChanged();
+            }
+        }
+        private global::System.String _SubContractorTerm;
+        partial void OnSubContractorTermChanging(global::System.String value);
+        partial void OnSubContractorTermChanged();
 
         #endregion
 

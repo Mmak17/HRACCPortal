@@ -198,6 +198,7 @@
     <Compile Include="Controllers\PaymentsReceivedController.cs" />
     <Compile Include="Controllers\PositionController.cs" />
     <Compile Include="Controllers\QuaterlySalesReportController.cs" />
+    <Compile Include="Controllers\SubContractorControllercs.cs" />
     <Compile Include="Edmx\HRACCDB.Designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
@@ -228,6 +229,7 @@
     <Compile Include="Models\PaymentsReceivedModel.cs" />
     <Compile Include="Models\PositionModel.cs" />
     <Compile Include="Models\QuaterlySalesReport.cs" />
+    <Compile Include="Models\SubContractorModel.cs" />
     <Compile Include="ObjectModel\BalanceSheetObjectModel.cs" />
     <Compile Include="ObjectModel\CustomerObjectModel.cs" />
     <Compile Include="ObjectModel\EmployerObjectModel.cs" />
@@ -236,6 +238,7 @@
     <Compile Include="ObjectModel\InvoiceSubmissionObjectModel.cs" />
     <Compile Include="ObjectModel\LoginObjectModel.cs" />
     <Compile Include="ObjectModel\PositionObjectModel.cs" />
+    <Compile Include="ObjectModel\SubContractorObjectModel.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Startup.cs" />
   </ItemGroup>
