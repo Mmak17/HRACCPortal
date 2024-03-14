@@ -20,6 +20,7 @@ namespace HRACCPortal.Models
         public ConsultantPositionDetailsModel consultantPositionDetailsModel;
         public EmployerModel employerModel; //For Employer Table
         public SubContractorModel subcontractorModel; //for subcontractor
+        public PaymentsReceivedModel PaymentsReceivedModel;
         /// </summary>
         public clsCrud()
         {
@@ -32,6 +33,7 @@ namespace HRACCPortal.Models
             consultantPositionDetailsModel = new ConsultantPositionDetailsModel();
             employerModel = new EmployerModel(); //For Employer Table
             subcontractorModel = new SubContractorModel(); //for subcontractor
+            PaymentsReceivedModel = new PaymentsReceivedModel();
             entities = new HRACCDBEntities();
         }
         public List<CustomerModel> CustomerList { get; set; }
@@ -40,6 +42,7 @@ namespace HRACCPortal.Models
         public List<ConsultantModel> ConsultantList { get; set; }
         public List<ConsultantPositionDetailsModel> ConsultantPositionDetailsList { get; set; }
         public List<InvoiceSubmissionModel> InvoiceSubmissionList { get; set; }
+        public List<PaymentsReceivedModel> PaymentsReceivedList { get; set; }
 
         public IEnumerable<SelectListItem> ddlPositionsList
         {
@@ -190,8 +193,8 @@ namespace HRACCPortal.Models
                                    CustomerName = customer.CustomerName,
                                    CustomerTerm = customer.CustomerTerm,
                                    DateAdded = customer.DateAdded,
-                                  // DateUpdated = Convert.ToDateTime(customer.DateUpdated).ToString("MMM,dd, yyyy"),
-                                   DateUpdated= DateTime.Now.ToString("MMM,dd,yyyy"),
+                                   // DateUpdated = Convert.ToDateTime(customer.DateUpdated).ToString("MMM,dd, yyyy"),
+                                   DateUpdated = DateTime.Now.ToString("MMM,dd,yyyy"),
                                    // DateUpdated = customer.DateUpdated,
                                    UpdatedBy = customer.UpdatedBy,
                                    CustomerIdPK = customer.CustomerIdPK,
@@ -219,7 +222,107 @@ namespace HRACCPortal.Models
             return customerModel;
         }
 
-        
+
+        #endregion
+
+        #region PaymentsReceived
+        public string AddPaymentsReceived(PaymentsReceivedModel PaymentsReceived)
+        {
+            if (PaymentsReceived.PaymentsReceivedId > 0)
+            {
+                var PaymentsReceivedModel = entities.PaymentsReceiveds.Where(x => x.PaymentsReceivedId == PaymentsReceived.PaymentsReceivedId).FirstOrDefault();
+                PaymentsReceivedModel.AddedBy = "Admin";
+                PaymentsReceivedModel.InvoiceNumber = PaymentsReceived.InvoiceNumber;
+                PaymentsReceivedModel.InvoiceAmount = PaymentsReceived.InvoiceAmount;
+                PaymentsReceivedModel.InvoiceDueDate = PaymentsReceived.InvoiceDueDate;
+                PaymentsReceivedModel.CustomerName = PaymentsReceived.CustomerName;
+                PaymentsReceivedModel.DateAdded = PaymentsReceived.DateAdded;
+                PaymentsReceivedModel.DateUpdated = PaymentsReceived.DateUpdated;
+                PaymentsReceivedModel.AddedBy = PaymentsReceived.AddedBy;
+                PaymentsReceivedModel.UpdatedBy = PaymentsReceived.UpdatedBy;
+
+
+                PaymentsReceivedModel.DateUpdated = DateTime.Now.ToString("MM/dd/yyyy").Replace("-", "/");
+                PaymentsReceivedModel.UpdatedBy = "ADMIN";
+                PaymentsReceivedModel.PaymentsReceivedId = PaymentsReceived.PaymentsReceivedId;
+
+                int i = entities.SaveChanges();
+                if (i > 0)
+                {
+                    return "updated";
+                }
+                else
+                {
+                    return "fail";
+                }
+            }
+            else
+            {
+
+                PaymentsReceived payre = new PaymentsReceived
+                {
+                    AddedBy = PaymentsReceived.AddedBy,
+                    InvoiceNumber = PaymentsReceived.InvoiceNumber,
+                    InvoiceAmount = PaymentsReceived.InvoiceAmount,
+                    InvoiceDueDate = PaymentsReceived.InvoiceDueDate,
+                    CustomerName = PaymentsReceived.CustomerName,
+
+                    DateAdded = DateTime.Now.ToString("MM/dd/yyyy").Replace("-", "/"),
+                    DateUpdated = DateTime.Now.ToString("MM/dd/yyyy").Replace("-", "/"),
+                    UpdatedBy = "Admin",
+
+
+                };
+
+                entities.PaymentsReceiveds.AddObject(payre);
+                int i = entities.SaveChanges();
+                if (i > 0)
+                {
+                    return "success";
+                }
+                else
+                {
+                    return "fail";
+                }
+            }
+        }
+        public void GetPaymentsReceived()
+        {
+            PaymentsReceivedList = (from p in entities.PaymentsReceiveds
+                                    select p
+                               ).AsEnumerable().Select(PaymentsReceived => new PaymentsReceivedModel
+                               {
+                                   AddedBy = PaymentsReceived.AddedBy,
+                                   InvoiceNumber = PaymentsReceived.InvoiceNumber,
+                                   InvoiceAmount = PaymentsReceived.InvoiceAmount,
+                                   InvoiceDueDate = PaymentsReceived.InvoiceDueDate,
+                                   CustomerName = PaymentsReceived.CustomerName,
+                                   DateAdded = PaymentsReceived.DateAdded,
+
+                                   // DateUpdated = Convert.ToDateTime(customer.DateUpdated).ToString("MMM,dd, yyyy"),
+                                   DateUpdated = DateTime.Now.ToString("MMM,dd,yyyy"),
+                                   // DateUpdated = customer.DateUpdated,
+                                   UpdatedBy = PaymentsReceived.UpdatedBy,
+                                   PaymentsReceivedId = PaymentsReceived.PaymentsReceivedId,
+
+                               }).ToList();
+        }
+        public PaymentsReceivedModel GetPaymentsReceivedById(int id)
+        {
+            var PaymentsReceived = entities.PaymentsReceiveds.Where(x => x.PaymentsReceivedId == id).FirstOrDefault();
+            PaymentsReceivedModel.AddedBy = PaymentsReceived.AddedBy;
+            PaymentsReceivedModel.InvoiceNumber = PaymentsReceived.InvoiceNumber;
+            PaymentsReceivedModel.InvoiceAmount = PaymentsReceived.InvoiceAmount;
+            PaymentsReceivedModel.InvoiceDueDate = PaymentsReceived.InvoiceDueDate;
+            PaymentsReceivedModel.CustomerName = PaymentsReceived.CustomerName;
+            PaymentsReceivedModel.DateAdded = PaymentsReceived.DateAdded;
+            PaymentsReceivedModel.DateUpdated = PaymentsReceived.DateUpdated;
+            PaymentsReceivedModel.AddedBy = PaymentsReceived.AddedBy;
+            PaymentsReceivedModel.UpdatedBy = PaymentsReceived.UpdatedBy;
+            PaymentsReceivedModel.PaymentsReceivedId = PaymentsReceived.PaymentsReceivedId;
+            return PaymentsReceivedModel;
+        }
+
         #endregion
 
         #region Employer
@@ -571,8 +674,8 @@ namespace HRACCPortal.Models
                                    StartDate = obj.StartDate,
                                    DateAdded = obj.DateAdded, //string.IsNullOrEmpty(obj.DateAdded) == true ? DateTime.Now.ToString("MM/dd/yyyy") : DateTime.Parse(obj.DateAdded).ToString("MM/dd/yyyy"),
                                                               //  DateUpdated = obj.DateUpdated,
-                                   //DateUpdated = Convert.ToDateTime(obj.DateUpdated).ToString("MMM,dd, yyyy"),
-                                   DateUpdated= DateTime.Now.ToString("MMM,dd,yyyy"),
+                                                              //DateUpdated = Convert.ToDateTime(obj.DateUpdated).ToString("MMM,dd, yyyy"),
+                                   DateUpdated = DateTime.Now.ToString("MMM,dd,yyyy"),
                                    UpdatedBy = obj.UpdatedBy,
                                    State = obj.State,
                                    Title = obj.Title,
@@ -718,7 +821,7 @@ namespace HRACCPortal.Models
                                           join p in entities.Positions on cpd.PositionIdFK equals p.PositionIdPK
                                           join pr in entities.PositionRates on p.PositionIdPK equals pr.PositionIdFK
                                           join c in entities.Customers on p.CustomerIdFK equals c.CustomerIdPK
-                                    //      join e in entities.Employers on p.EmployerIdFK equals e.EmployerIdPK
+                                          //      join e in entities.Employers on p.EmployerIdFK equals e.EmployerIdPK
                                           where inv.InvoiceIdPK == id
                                           select new { inv, cpd, p, c, ct, pr }).AsEnumerable().Select(x => new InvoicePdfModel
                                           {
@@ -754,10 +857,10 @@ namespace HRACCPortal.Models
                                               MonthStartDate = FirstDayOfMonthFromDateTime(x.inv.Year, x.inv.Month),
                                               MonthEndDate = LastDayOfMonthFromDateTime(x.inv.Year, x.inv.Month),
                                               DateAdded = x.inv.DateAdded,
-                                           //   InvoiceDate = Convert.ToDateTime(x.inv.InvoiceDate).ToString("MMM,dd, yyyy"),
+                                              //   InvoiceDate = Convert.ToDateTime(x.inv.InvoiceDate).ToString("MMM,dd, yyyy"),
                                               InvoiceDate = DateTime.Now.ToString("MMM,dd,yyyy"),
                                               DueDate = string.IsNullOrEmpty(x.inv.DueDate) ? "" : DateTime.Now.ToString("MMM,dd,yyyy"),
-                                            //  DueDate = string.IsNullOrEmpty(x.inv.DueDate) ? "" : Convert.ToDateTime(x.inv.DueDate).ToString("MMM,dd, yyyy"),
+                                              //  DueDate = string.IsNullOrEmpty(x.inv.DueDate) ? "" : Convert.ToDateTime(x.inv.DueDate).ToString("MMM,dd, yyyy"),
                                               Term = x.c.CustomerTerm,
 
                                           }).ToList();
@@ -796,4 +899,5 @@ namespace HRACCPortal.Models
         }
         #endregion
     }
+
 }

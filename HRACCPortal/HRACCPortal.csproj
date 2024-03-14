@@ -237,6 +237,7 @@
     <Compile Include="ObjectModel\InvoiceObjectModel.cs" />
     <Compile Include="ObjectModel\InvoiceSubmissionObjectModel.cs" />
     <Compile Include="ObjectModel\LoginObjectModel.cs" />
+    <Compile Include="ObjectModel\PaymentsReceivedObjectModel.cs" />
     <Compile Include="ObjectModel\PositionObjectModel.cs" />
     <Compile Include="ObjectModel\QuaterlySalesReportObjectModel.cs" />
     <Compile Include="ObjectModel\SubContractorObjectModel.cs" />
