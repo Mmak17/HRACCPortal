@@ -69,13 +69,13 @@
                     <!--begin::Table body-->
                     <tbody class="fw-semibold text-gray-600">
                         @{
-                            if (Model.CustomerList.Count > 0)
+                            if (Model.PaymentsReceivedList.Count > 0)
                             {
-                                foreach (var item in Model.CustomerList)
+                                foreach (var item in Model.PaymentsReceivedList)
                                 {
                                     <tr>
                                         <td>
-                                            @item.CustomerIdPK
+                                            @item.PaymentsReceivedId
                                         </td>
                                         <!--begin::Name=-->
                                         <td>
