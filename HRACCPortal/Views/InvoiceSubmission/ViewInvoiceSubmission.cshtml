@@ -191,21 +191,52 @@
                                         </label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input type="hidden" class="form-control form-control-solid" name="Year" value="0" />
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="Year" value="" />
+                                        @*  <input type="hidden" class="form-control form-control-solid" name="Year" value="0" />
+        <input type="text" class="form-control form-control-solid" placeholder="" name="Year" value="" /> *@
+                                        <select class="form-control form-control-solid" name="Year">
+                                            <option>Select Year</option>
+                                            <option>2024</option>
+                                            <option>2025</option>
+                                            <option>2026</option>
+                                            <option>2027</option>
+                                            <option>2028</option>
+                                            <option>2029</option>
+                                            <option>2030</option>
+                                            <option>2031</option>
+                                            <option>2032</option>
+                                            <option>2033</option>
+                                            <option>2034</option>
+                                            <option>2035</option>
+                                        </select>
                                         <!--end::Input-->
                                     </div>
                                 </div>
-                                    <div class="col-md-6 fv-row">
-                                        <!--begin::Label-->
-                                        <label class="fs-6 fw-semibold mb-2">
-                                            <span class="required">Month</span>
-                                        </label>
-                                        <!--end::Label-->
-                                        <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="Month" />
-                                        <!--end::Input-->
-                                    </div>
+                                <div class="col-md-6 fv-row">
+                                    <!--begin::Label-->
+                                    <label class="fs-6 fw-semibold mb-2">
+                                        <span class="required">Month</span>
+                                    </label>
+                                    <!--end::Label-->
+                                    <!--begin::Input-->
+                                    @*  <input type="text" class="form-control form-control-solid" placeholder="" name="Month" />*@
+                                <select class="form-control form-control-solid" name="Month">
+                                    <option>Select Month</option>
+                                    <option>January</option>
+                                    <option>February</option>
+                                    <option>March</option>
+                                    <option>April</option>
+                                    <option>May</option>
+                                    <option>June</option>
+                                    <option>July</option>
+                                    <option>August</option>
+                                    <option>September</option>
+                                    <option>October</option>
+                                    <option>November</option>
+                                    <option>December</option>
+                                </select>
+
+                                    <!--end::Input-->
+                                </div>
                                 </div>
                         <!--end::Card body-->
                         <!--begin::Modal footer-->

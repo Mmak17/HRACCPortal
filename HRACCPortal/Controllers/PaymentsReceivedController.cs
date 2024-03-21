@@ -1,62 +1,63 @@
-﻿using System;
+﻿using HRACCPortal.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-using HRACCPortal.Edmx;
-using HRACCPortal.Models;
 
 namespace HRACCPortal.Controllers
 {
-    [Authorize]
     public class PaymentsReceivedController : Controller
     {
-        // GET: Customer
-        public HRACCDBEntities entities;
-        clsCrud cls;
-        public PaymentsReceivedController()
-        {
-            entities = new HRACCDBEntities();
-            cls = new clsCrud();
-        }
+        // GET: BalanceSheet
         public ActionResult Index()
         {
             return View();
         }
 
-        public ActionResult AddPaymentsReceived()
+        private readonly PaymentsReceivedModel prmodel;
+
+        public PaymentsReceivedController()
         {
-            return View();
+            prmodel = new PaymentsReceivedModel();
         }
-        [HttpPost]
-        public ActionResult AddPaymentsReceived(PaymentsReceivedModel PaymentsReceived)
+        // GET: Position
+        [HttpGet]
+        public ActionResult ViewPaymentsReceived()
         {
+            prmodel.GetPaymentsReceivedList();
+            return View(prmodel);
+        }
 
-
-            string message = "";
+        //POST: Add Position
+        [HttpPost]
+        public ActionResult AddPaymentsReceived(PaymentsReceivedModel prmodel)
+        {
             try
             {
-                message = cls.AddPaymentsReceived(PaymentsReceived);
+                string status = prmodel.AddEditPaymentsReceived(prmodel);
+                return Json(new { message = status, JsonRequestBehavior.AllowGet });
             }
             catch (Exception e)
             {
-                message = e.Message;
+                return Json(new { message = e.Message, JsonRequestBehavior.AllowGet });
             }
 
-
-            return Json(new { message = message, JsonRequestBehavior.AllowGet });
         }
-
-
-        public ActionResult ViewPaymentsReceived()
+        //POST: Get Position for Edit View
+        public ActionResult EditPaymentsReceived(int? id)
         {
-            cls.GetPaymentsReceived();
-            return View(cls);
-        }
-        public ActionResult EditPaymentsReceived(int id)
-        {
-            PaymentsReceivedModel cl = cls.GetPaymentsReceivedById(id);
-            return Json(new { cl = cl, JsonRequestBehavior.AllowGet });
+            try
+            {
+                PaymentsReceivedModel paymentsreceivedData = prmodel.GetPaymentsReceivedDetailsById(id);
+
+                return Json(new { paymentsreceivedData = paymentsreceivedData, JsonRequestBehavior.AllowGet });
+            }
+            catch (Exception e)
+            {
+                return View(e.Message);
+            }
+
         }
 
     }

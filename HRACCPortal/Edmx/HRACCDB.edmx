@@ -241,10 +241,10 @@
             <PropertyRef Name="PaymentsReceivedId" />
           </Key>
           <Property Name="PaymentsReceivedId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="CustomerIdFK" Type="int" Nullable="false" />
           <Property Name="InvoiceNumber" Type="nvarchar(max)" />
           <Property Name="InvoiceAmount" Type="nvarchar(max)" />
           <Property Name="InvoiceDueDate" Type="nvarchar(max)" />
-          <Property Name="CustomerName" Type="nvarchar(max)" />
           <Property Name="DateAdded" Type="nvarchar(max)" />
           <Property Name="DateUpdated" Type="nvarchar(max)" />
           <Property Name="AddedBy" Type="nvarchar(max)" />
@@ -521,9 +521,9 @@
             <End Role="InvoiceGeneration1" EntitySet="InvoiceGenerations" />
           </AssociationSet>
           <EntitySet Name="BalanceSheets" EntityType="HRACCDBModel.BalanceSheet" />
-          <EntitySet Name="PaymentsReceiveds" EntityType="HRACCDBModel.PaymentsReceived" />
           <EntitySet Name="SubContractors" EntityType="HRACCDBModel.SubContractor" />
           <EntitySet Name="QuaterlySalesReports" EntityType="HRACCDBModel.QuaterlySalesReport" />
+          <EntitySet Name="PaymentsReceiveds" EntityType="HRACCDBModel.PaymentsReceived" />
           </EntityContainer>
         <EntityType Name="Position">
           <Key>
@@ -746,20 +746,6 @@
           <Property Name="AddedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
         </EntityType>
-        <EntityType Name="PaymentsReceived">
-          <Key>
-            <PropertyRef Name="PaymentsReceivedId" />
-          </Key>
-          <Property Name="PaymentsReceivedId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
-          <Property Name="InvoiceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="InvoiceAmount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="InvoiceDueDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="CustomerName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DateAdded" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="DateUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="AddedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-          <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
-        </EntityType>
         <EntityType Name="SubContractor">
           <Key>
             <PropertyRef Name="SubContractorIdPK" />
@@ -790,6 +776,20 @@
           <Property Name="Month" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="ConsultantName" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="InvoiceAmount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateAdded" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="DateUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="AddedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="UpdatedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+        </EntityType>
+        <EntityType Name="PaymentsReceived">
+          <Key>
+            <PropertyRef Name="PaymentsReceivedId" />
+          </Key>
+          <Property Name="PaymentsReceivedId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="CustomerIdFK" Type="Int32" Nullable="false" />
+          <Property Name="InvoiceNumber" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceAmount" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
+          <Property Name="InvoiceDueDate" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DateAdded" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="DateUpdated" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
           <Property Name="AddedBy" Type="String" MaxLength="Max" FixedLength="false" Unicode="true" />
@@ -1114,21 +1114,6 @@
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>
-          <EntitySetMapping Name="PaymentsReceiveds">
-            <EntityTypeMapping TypeName="HRACCDBModel.PaymentsReceived">
-              <MappingFragment StoreEntitySet="PaymentsReceived">
-                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
-                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
-                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
-                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
-                <ScalarProperty Name="CustomerName" ColumnName="CustomerName" />
-                <ScalarProperty Name="InvoiceDueDate" ColumnName="InvoiceDueDate" />
-                <ScalarProperty Name="InvoiceAmount" ColumnName="InvoiceAmount" />
-                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
-                <ScalarProperty Name="PaymentsReceivedId" ColumnName="PaymentsReceivedId" />
-              </MappingFragment>
-            </EntityTypeMapping>
-          </EntitySetMapping>
           <EntitySetMapping Name="SubContractors">
             <EntityTypeMapping TypeName="HRACCDBModel.SubContractor">
               <MappingFragment StoreEntitySet="SubContractor">
@@ -1163,6 +1148,21 @@
                 <ScalarProperty Name="Quarter" ColumnName="Quarter" />
                 <ScalarProperty Name="CustomerIdFK" ColumnName="CustomerIdFK" />
                 <ScalarProperty Name="QuaterlySalesReportIdPK" ColumnName="QuaterlySalesReportIdPK" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="PaymentsReceiveds">
+            <EntityTypeMapping TypeName="HRACCDBModel.PaymentsReceived">
+              <MappingFragment StoreEntitySet="PaymentsReceived">
+                <ScalarProperty Name="UpdatedBy" ColumnName="UpdatedBy" />
+                <ScalarProperty Name="AddedBy" ColumnName="AddedBy" />
+                <ScalarProperty Name="DateUpdated" ColumnName="DateUpdated" />
+                <ScalarProperty Name="DateAdded" ColumnName="DateAdded" />
+                <ScalarProperty Name="InvoiceDueDate" ColumnName="InvoiceDueDate" />
+                <ScalarProperty Name="InvoiceAmount" ColumnName="InvoiceAmount" />
+                <ScalarProperty Name="InvoiceNumber" ColumnName="InvoiceNumber" />
+                <ScalarProperty Name="CustomerIdFK" ColumnName="CustomerIdFK" />
+                <ScalarProperty Name="PaymentsReceivedId" ColumnName="PaymentsReceivedId" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

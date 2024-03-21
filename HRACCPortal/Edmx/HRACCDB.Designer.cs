@@ -347,22 +347,6 @@ namespace HRACCPortal.Edmx
         /// <summary>
         /// No Metadata Documentation available.
         /// </summary>
-        public ObjectSet<PaymentsReceived> PaymentsReceiveds
-        {
-            get
-            {
-                if ((_PaymentsReceiveds == null))
-                {
-                    _PaymentsReceiveds = base.CreateObjectSet<PaymentsReceived>("PaymentsReceiveds");
-                }
-                return _PaymentsReceiveds;
-            }
-        }
-        private ObjectSet<PaymentsReceived> _PaymentsReceiveds;
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
         public ObjectSet<SubContractor> SubContractors
         {
             get
@@ -391,6 +375,22 @@ namespace HRACCPortal.Edmx
             }
         }
         private ObjectSet<QuaterlySalesReport> _QuaterlySalesReports;
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        public ObjectSet<PaymentsReceived> PaymentsReceiveds
+        {
+            get
+            {
+                if ((_PaymentsReceiveds == null))
+                {
+                    _PaymentsReceiveds = base.CreateObjectSet<PaymentsReceived>("PaymentsReceiveds");
+                }
+                return _PaymentsReceiveds;
+            }
+        }
+        private ObjectSet<PaymentsReceived> _PaymentsReceiveds;
 
         #endregion
 
@@ -533,14 +533,6 @@ namespace HRACCPortal.Edmx
         }
     
         /// <summary>
-        /// Deprecated Method for adding a new object to the PaymentsReceiveds EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
-        /// </summary>
-        public void AddToPaymentsReceiveds(PaymentsReceived paymentsReceived)
-        {
-            base.AddObject("PaymentsReceiveds", paymentsReceived);
-        }
-    
-        /// <summary>
         /// Deprecated Method for adding a new object to the SubContractors EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
         /// </summary>
         public void AddToSubContractors(SubContractor subContractor)
@@ -554,6 +546,14 @@ namespace HRACCPortal.Edmx
         public void AddToQuaterlySalesReports(QuaterlySalesReport quaterlySalesReport)
         {
             base.AddObject("QuaterlySalesReports", quaterlySalesReport);
+        }
+    
+        /// <summary>
+        /// Deprecated Method for adding a new object to the PaymentsReceiveds EntitySet. Consider using the .Add method of the associated ObjectSet&lt;T&gt; property instead.
+        /// </summary>
+        public void AddToPaymentsReceiveds(PaymentsReceived paymentsReceived)
+        {
+            base.AddObject("PaymentsReceiveds", paymentsReceived);
         }
 
         #endregion
@@ -5084,10 +5084,12 @@ namespace HRACCPortal.Edmx
         /// Create a new PaymentsReceived object.
         /// </summary>
         /// <param name="paymentsReceivedId">Initial value of the PaymentsReceivedId property.</param>
-        public static PaymentsReceived CreatePaymentsReceived(global::System.Int32 paymentsReceivedId)
+        /// <param name="customerIdFK">Initial value of the CustomerIdFK property.</param>
+        public static PaymentsReceived CreatePaymentsReceived(global::System.Int32 paymentsReceivedId, global::System.Int32 customerIdFK)
         {
             PaymentsReceived paymentsReceived = new PaymentsReceived();
             paymentsReceived.PaymentsReceivedId = paymentsReceivedId;
+            paymentsReceived.CustomerIdFK = customerIdFK;
             return paymentsReceived;
         }
 
@@ -5121,6 +5123,30 @@ namespace HRACCPortal.Edmx
         private global::System.Int32 _PaymentsReceivedId;
         partial void OnPaymentsReceivedIdChanging(global::System.Int32 value);
         partial void OnPaymentsReceivedIdChanged();
+    
+        /// <summary>
+        /// No Metadata Documentation available.
+        /// </summary>
+        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=false)]
+        [DataMemberAttribute()]
+        public global::System.Int32 CustomerIdFK
+        {
+            get
+            {
+                return _CustomerIdFK;
+            }
+            set
+            {
+                OnCustomerIdFKChanging(value);
+                ReportPropertyChanging("CustomerIdFK");
+                _CustomerIdFK = StructuralObject.SetValidValue(value, "CustomerIdFK");
+                ReportPropertyChanged("CustomerIdFK");
+                OnCustomerIdFKChanged();
+            }
+        }
+        private global::System.Int32 _CustomerIdFK;
+        partial void OnCustomerIdFKChanging(global::System.Int32 value);
+        partial void OnCustomerIdFKChanged();
     
         /// <summary>
         /// No Metadata Documentation available.
@@ -5193,30 +5219,6 @@ namespace HRACCPortal.Edmx
         private global::System.String _InvoiceDueDate;
         partial void OnInvoiceDueDateChanging(global::System.String value);
         partial void OnInvoiceDueDateChanged();
-    
-        /// <summary>
-        /// No Metadata Documentation available.
-        /// </summary>
-        [EdmScalarPropertyAttribute(EntityKeyProperty=false, IsNullable=true)]
-        [DataMemberAttribute()]
-        public global::System.String CustomerName
-        {
-            get
-            {
-                return _CustomerName;
-            }
-            set
-            {
-                OnCustomerNameChanging(value);
-                ReportPropertyChanging("CustomerName");
-                _CustomerName = StructuralObject.SetValidValue(value, true, "CustomerName");
-                ReportPropertyChanged("CustomerName");
-                OnCustomerNameChanged();
-            }
-        }
-        private global::System.String _CustomerName;
-        partial void OnCustomerNameChanging(global::System.String value);
-        partial void OnCustomerNameChanged();
     
         /// <summary>
         /// No Metadata Documentation available.

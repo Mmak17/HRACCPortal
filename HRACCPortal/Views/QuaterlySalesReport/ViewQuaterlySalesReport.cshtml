@@ -197,7 +197,15 @@
                                         <!--end::Label-->
                                         <!--begin::Input-->
                                         <input type="hidden" class="form-control form-control-solid" name="QuaterlySalesReportIdPK" value="0" />
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="Quarter" value="" />
+                                  @*      <input type="text" class="form-control form-control-solid" placeholder="" name="Quarter" value="" />*@
+                                        <select class="form-control form-control-solid" name="Quarter">
+                                            <option>Select Quarter</option>
+                                            <option>Q1(January-March)</option>
+                                            <option>Q2(April-June)</option>
+                                            <option>Q3(July-September)</option>
+                                            <option>Q4(October-December)</option>
+                                            
+                                        </select>
                                         <!--end::Input-->
                                     </div>
                                 </div>
@@ -209,8 +217,23 @@
                                         </label>
                                         <!--end::Label-->
                                         <!--begin::Input-->
-                                        <input type="text" class="form-control form-control-solid" placeholder="" name="Month" />
-                                        
+                                     @*   <input type="text" class="form-control form-control-solid" placeholder="" name="Month" />*@
+                                        <select class="form-control form-control-solid" name="Month">
+                                            <option>Select Month</option>
+                                            <option>January</option>
+                                            <option>February</option>
+                                            <option>March</option>
+                                            <option>April</option>
+                                            <option>May</option>
+                                            <option>June</option>
+                                            <option>July</option>
+                                            <option>August</option>
+                                            <option>September</option>
+                                            <option>October</option>
+                                            <option>November</option>
+                                            <option>December</option>
+                                        </select>
+
                                         <!--end::Input-->
                                     </div>
                                     <div class="col-md-6 fv-row">

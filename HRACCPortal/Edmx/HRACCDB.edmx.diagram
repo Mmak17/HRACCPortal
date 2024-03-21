@@ -26,6 +26,7 @@
         <EntityTypeShape EntityType="HRACCDBModel.BalanceSheet" Width="1.5" PointX="0.75" PointY="12.75" />
         <EntityTypeShape EntityType="HRACCDBModel.SubContractor" Width="1.5" PointX="5.375" PointY="12.75" />
         <EntityTypeShape EntityType="HRACCDBModel.QuaterlySalesReport" Width="1.5" PointX="7.375" PointY="12.75" />
+        <EntityTypeShape EntityType="HRACCDBModel.PaymentsReceived" Width="1.5" PointX="9.375" PointY="12.75" />
       </Diagram>
     </edmx:Diagrams>
   </edmx:Designer>
