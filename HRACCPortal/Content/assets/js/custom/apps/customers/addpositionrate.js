@@ -36,7 +36,16 @@ var KTModalCustomersAdd = function () {
                                 message: 'Fiscal Year End is required'
 							}
 						}
-					},
+                    },
+                    'FiscalYearAbbrv': {
+                        validators: {
+                            stringLength: {
+                                max: 10,
+                                message: 'The Fiscal Year Abbreviation must be less than 10 characters'
+                            }
+                            
+                        }
+                    },
 					'Rate': {
                         validators: {
 							notEmpty: {

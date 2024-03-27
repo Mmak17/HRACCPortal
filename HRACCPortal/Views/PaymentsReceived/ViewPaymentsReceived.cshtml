@@ -207,9 +207,26 @@
                                         <input type="text" class="form-control form-control-solid" placeholder="" name="InvoiceDueDate" />
 
                                         <!--end::Input-->
-                                    </div>
+                                    </div> 
+
+                                   @* <div class="col-md-6 fv-row">
+                                        <!--begin::Label-->
+                                        <label class="required fs-6 fw-semibold mb-2">Invoice DueDate</label>
+                                        <!--end::Label-->
+                                        <!--begin::Input-->
+                                        <div class="input-group" id="kt_td_picker_date_only" data-td-target-input="nearest" data-td-target-toggle="nearest">
+                                            <input id="InvoiceDueDate" name="InvoiceDueDate" type="text" class="form-control form-control-solid" data-td-target="#kt_td_picker_date_only" readonly="readonly" />
+                                            <span class="input-group-text" data-td-target="#kt_td_picker_date_only" data-td-toggle="datetimepicker">
+                                                <i class="fas fa-calendar"></i>
+                                            </span>
+                                        </div>
+                                        <!--end::Input-->
+                                    </div> *@
+
+
                                 </div>
-                                
+                                </div>
+                            </div>
                                     <!--end::Card body-->
                                     <!--begin::Modal footer-->
                                     <div class="modal-footer flex-center">
@@ -255,6 +272,20 @@
     <!--end::Custom Javascript-->
     <script>
         new tempusDominus.TempusDominus(document.getElementById("InactiveDate"), {
+            display: {
+                viewMode: "calendar",
+                components: {
+                    decades: true,
+                    year: true,
+                    month: true,
+                    date: true,
+                    hours: false,
+                    minutes: false,
+                    seconds: false
+                }
+            }
+        });
+        new tempusDominus.TempusDominus(document.getElementById("InvoiceDueDate"), {
             display: {
                 viewMode: "calendar",
                 components: {

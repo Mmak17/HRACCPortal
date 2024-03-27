@@ -13,6 +13,7 @@ namespace HRACCPortal.ObjectModel
 
         public int InvoiceSubmissionId { get; set; }
         public int CustomerIdFK { get; set; }
+        public string CustomerName { get; set; }
         public string Year { get; set; }
         public string Month { get; set; }
         public string DateAdded { get; set; }

@@ -261,7 +261,10 @@
     <Content Include="Content\assets\js\custom\apps\contacts\edit-contact.js" />
     <Content Include="Content\assets\js\custom\apps\contacts\view-contact.js" />
     <Content Include="Content\assets\js\custom\apps\customers\add.js" />
+    <Content Include="Content\assets\js\custom\apps\customers\addbalancesheet.js" />
     <Content Include="Content\assets\js\custom\apps\customers\addinvoice.js" />
+    <Content Include="Content\assets\js\custom\apps\customers\addinvoicegeneration.js" />
+    <Content Include="Content\assets\js\custom\apps\customers\addinvoicesubmission.js" />
     <Content Include="Content\assets\js\custom\apps\customers\addpaymentsreceived.js" />
     <Content Include="Content\assets\js\custom\apps\customers\addpositionrate.js" />
     <Content Include="Content\assets\js\custom\apps\customers\addposition.js" />

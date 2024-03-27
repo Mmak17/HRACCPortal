@@ -70,7 +70,7 @@ namespace HRACCPortal.Models
             InvoiceSubmissionModel invoicesubmissionModel = new InvoiceSubmissionModel()
             {
                 CustomerIdFK = invoicesubmissionData.CustomerIdFK,
-              //  CustomerName = customerData.CustomerName,
+                CustomerName = customerData.CustomerName,
                 InvoiceSubmissionId = invoicesubmissionData.InvoiceSubmissionId,
                 Year = invoicesubmissionData.Year,
                 Month = invoicesubmissionData.Month,
@@ -100,7 +100,7 @@ namespace HRACCPortal.Models
                             }).AsEnumerable().Select(i => new InvoiceSubmissionObjectModel
                             {
                                 InvoiceSubmissionId = i.InvoiceSubmissionId,
-                             // CustomerName = i.CustomerName,
+                              CustomerName = i.CustomerName,
                                 Year = i.Year,
                                 Month = i.Month,
                                 DateAdded = i.DateAdded,

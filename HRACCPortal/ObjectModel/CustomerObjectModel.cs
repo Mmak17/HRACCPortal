@@ -24,6 +24,7 @@ namespace HRACCPortal.ObjectModel
         public string CustomerContactCity { get; set; }
         public string CustomerContactState { get; set; }
         public string CustomerContactZip { get; set; }
+        public string CustomerTerm { get; set; }
         public string DateAdded { get; set; }
         public string DateUpdated { get; set; }
         public string AddedBy { get; set; }

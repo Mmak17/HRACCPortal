@@ -56,7 +56,7 @@
                             </svg>
                         </span>
                         <!--end::Svg Icon-->
-                        <input type="text" data-kt-customer-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search BalanceSheets" />
+                        <input type="text" data-kt-balancesheet-table-filter="search" class="form-control form-control-solid w-250px ps-15" placeholder="Search BalanceSheets" />
                     </div>
                     <!--end::Search-->
                 </div>
@@ -64,9 +64,9 @@
                 <!--begin::Card toolbar-->
                 <div class="card-toolbar">
                     <!--begin::Toolbar-->
-                    <div class="d-flex justify-content-end" data-kt-customer-table-toolbar="base">
+                    <div class="d-flex justify-content-end" data-kt-balancesheet-table-toolbar="base">
                         <!--begin::Add customer-->
-                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_customer" id="btnpopup">Add BalanceSheet</button>
+                        <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#kt_modal_add_balancesheet" id="btnpopup">Add BalanceSheet</button>
                         <!--end::Add customer-->
                     </div>
                     <!--end::Toolbar-->
@@ -82,8 +82,9 @@
                     <thead>
                         <!--begin::Table row-->
                         <tr class="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-                            <th class="min-w-100px">Year</th>
-                            <th class="min-w-100px">Month</th>
+                            <th>BSId</th>
+                            <th>Year</th>
+                            <th>Month</th>
                             <th>Invoice Number</th>
                             <th>Invoice Amount</th>
                             <th>Payment Received</th>
@@ -140,20 +141,20 @@
         <!--end::Card-->
         <!--begin::Modals-->
         <!--begin::Modal - Customers - Add-->
-        <div class="modal fade" id="kt_modal_add_customer" tabindex="-1" aria-hidden="true">
+        <div class="modal fade" id="kt_modal_add_balancesheet" tabindex="-1" aria-hidden="true">
             <!--begin::Modal dialog-->
             <div class="modal-dialog modal-dialog-centered mw-650px">
                 <!--begin::Modal content-->
                 <div class="modal-content">
                     <!--begin::Form-->
-                    <form id="kt_modal_add_customer_form" class="form" action="#" data-kt-redirect="@Url.Action("ViewBalanceSheet","BalanceSheet")">
+                    <form id="kt_modal_add_balancesheet_form" class="form" action="#" data-kt-redirect="@Url.Action("ViewBalanceSheet","BalanceSheet")">
                         <!--begin::Modal header-->
-                        <div class="modal-header" id="kt_modal_add_customer_header">
+                        <div class="modal-header" id="kt_modal_add_balancesheet_header">
                             <!--begin::Modal title-->
                             <h2 class="fw-bold">BalanceSheet Details</h2>
                             <!--end::Modal title-->
                             <!--begin::Close-->
-                            <div id="kt_modal_add_customer_close" class="btn btn-icon btn-sm btn-active-icon-primary">
+                            <div id="kt_modal_add_balancesheet_close" class="btn btn-icon btn-sm btn-active-icon-primary">
                                 <!--begin::Svg Icon | path: icons/duotune/arrows/arr061.svg-->
                                 <span class="svg-icon svg-icon-1">
                                     <svg width="24" height="24" viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg">
@@ -169,7 +170,7 @@
                         <!--begin::Card body-->
                         <div class="modal-body py-10 px-lg-17">
                             <!--begin::Scroll-->
-                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_customer_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_customer_header" data-kt-scroll-wrappers="#kt_modal_add_customer_scroll" data-kt-scroll-offset="300px">
+                            <div class="scroll-y me-n7 pe-7" id="kt_modal_add_balancesheet_scroll" data-kt-scroll="true" data-kt-scroll-activate="{default: false, lg: true}" data-kt-scroll-max-height="auto" data-kt-scroll-dependencies="#kt_modal_add_balancesheet_header" data-kt-scroll-wrappers="#kt_modal_add_balancesheet_scroll" data-kt-scroll-offset="300px">
                                 <div class="row g-9 mb-7">
                                     <div class="col-md-6 fv-row">
                                         <!--begin::Input group-->
@@ -181,7 +182,7 @@
                                             </label>
                                             <!--end::Label
                                             <!--begin::Input-->
-                                            <select name="CustomerName" aria-label="Select a Customer Name" data-control="select2" data-placeholder="Select a Customer..." data-dropdown-parent="#kt_modal_add_customer" class="form-select form-select-solid fw-bold CustomerName">
+                                            <select name="CustomerName" aria-label="Select a Customer Name" data-control="select2" data-placeholder="Select a Customer..." data-dropdown-parent="#kt_modal_add_balancesheet" class="form-select form-select-solid fw-bold CustomerName">
                                                 <option value="">Select a Customer...</option>
                                                 @foreach (var item in Model.ddlCustomerList)
                                                 {
@@ -192,6 +193,8 @@
                                         </div>
                                         <!--end::Input group-->
                                     </div>
+                                    
+                                
                                     <div class="col-md-6 fv-row">
                                         <!--begin::Label-->
                                         <label class="fs-6 fw-semibold mb-2">
@@ -292,14 +295,19 @@
                                         <input type="text" class="form-control form-control-solid" placeholder="" name="BalanceSheet" />
                                         <!--end::Input-->
                                     </div>
+                                    </div>
+                                
+
+                                </div>
+                            </div>
                         <!--end::Card body-->
                         <!--begin::Modal footer-->
                         <div class="modal-footer flex-center">
                             <!--begin::Button-->
-                            <button type="reset" id="kt_modal_add_customer_cancel" class="btn btn-danger me-3">Discard</button>
+                            <button type="reset" id="kt_modal_add_balancesheet_cancel" class="btn btn-danger me-3">Discard</button>
                             <!--end::Button-->
                             <!--begin::Button-->
-                            <button type="submit" id="kt_modal_add_customer_submit" class="btn btn-primary">
+                            <button type="submit" id="kt_modal_add_balancesheet_submit" class="btn btn-primary">
                                 <span class="indicator-label">Submit</span>
                                 <span class="indicator-progress">
                                     Please wait...
@@ -331,12 +339,12 @@
     <!--begin::Custom Javascript(used for this page only)-->
     <script src="~/Content/assets/plugins/custom/fullcalendar/fullcalendar.bundle.js"></script>
     <script src="~/Content/assets/js/custom/apps/customers/list/list.js"></script>
-    <script src="~/Content/assets/js/custom/apps/customers/addposition.js"></script>
+    <script src="~/Content/assets/js/custom/apps/customers/addbalancesheet.js"></script>
     <script src="~/Content/assets/js/widgets.bundle.js"></script>
     <script src="~/Content/assets/js/custom/widgets.js"></script>
     <!--end::Custom Javascript-->
     <script>
-        new tempusDominus.TempusDominus(document.getElementById("InactiveDate"), {
+    @*    new tempusDominus.TempusDominus(document.getElementById("InactiveDate"), {
             display: {
                 viewMode: "calendar",
                 components: {
@@ -349,40 +357,40 @@
                     seconds: false
                 }
             }
-        });
+        }); *@
 
-        function EditPosition_Click(clicked) {
+        function EditBalanceSheet_Click(clicked) {
             $.ajax({
                 type: "POST",
-                url: '/Position/EditPosition',
+                url: '/BalanceSheet/EditBalanceSheet',
                 data: '{id: ' + clicked + '}',
                 dataType: "json",
                 contentType: "application/json; charset=utf-8",
                 success: function (response) {
                     $("#btnpopup").click();
                     //$("input[name='CustomerName']").val(response.positionData.CustomerName);
-                    $(".CustomerName").val(response.positionData.CustomerIdFK);
+                    $(".CustomerName").val(response.balancesheetData.CustomerIdFK);
                     $(".CustomerName").change();
-                    $("input[name='PositionIdPK']").val(response.positionData.PositionIdPK);
-                    $("input[name='CustomerIdFK']").val(response.positionData.CustomerIdFK);
-                    $("input[name='PositionNumber']").val(response.positionData.PositionNumber).attr("disabled", "disabled");
-                    $("input[name='PositionTitle']").val(response.positionData.PositionTitle);
-                    $("input[name='PositionFamily']").val(response.positionData.PositionFamily);
-                    $("input[name='PositionScopeVariant']").val(response.positionData.PositionScopeVariant);
-                    $("input[name='PurchaseOrderNo']").val(response.positionData.PurchaseOrderNo).addClass('input-disabled');
-                    $("input[name='PurchaseRequisitionNo']").val(response.positionData.PurchaseRequisitionNo);
+                    $("input[name='BalanceSheetId']").val(response.balancesheetData.BalanceSheetId);
+                    $("input[name='CustomerIdFK']").val(response.balancesheetData.CustomerIdFK);
+                    $("input[name='Year']").val(response.balancesheetData.Year).attr("disabled", "disabled");
+                    $("input[name='Month']").val(response.balancesheetData.Month);
+                    $("input[name='InvoiceNumber']").val(response.balancesheetData.InvoiceNumber);
+                    $("input[name='InvoiceAmount']").val(response.balancesheetData.InvoiceAmount);
+                    $("input[name='PaymentReceived']").val(response.balancesheetData.PaymentReceived).addClass('input-disabled');
+                    $("input[name='Balance']").val(response.balancesheetData.Balance);
 
-                    if (response.positionData.Status == true) {
+                    if (response.balancesheetData.Status == true) {
                         $("#Status").prop('checked', true);
                         $("#hide_inactivedetails").hide();
                     }
-                    if (response.positionData.Status == false) {
+                    if (response.balancesheetData.Status == false) {
                         $("#Status").prop('checked', false);
                         $("#hide_inactivedetails").show();
                     }
 
-                    $("input[name='InactiveDate']").val(response.positionData.InactiveDate);
-                    $("input[name='InactiveReason']").val(response.positionData.InactiveReason);
+                    $("input[name='InactiveDate']").val(response.balancesheetData.InactiveDate);
+                    $("input[name='InactiveReason']").val(response.balancesheetData.InactiveReason);
                 },
                 error: function (jqXHR, textStatus, errorThrown) {
                     submitButton.removeAttribute('data-kt-indicator');

@@ -1,5 +1,6 @@
 ﻿"use strict";
 
+
 // Class definition
 var KTModalEmployersAdd = function () {
     var submitButton;
@@ -30,12 +31,12 @@ var KTModalEmployersAdd = function () {
 
                     'EmployerContactPhone': {
                         validators: {
-                            phone: {
-                                  country: function () {
-                                    return form.querySelector('[name="US"]').value;
-                                  },
-                                 message: 'The value is not a valid phone number',
-                               },
+                            /*  phone: {
+                                    country: function () {
+                                      return form.querySelector('[name="US"]').value;
+                                    },
+                                   message: 'The value is not a valid phone number',
+                                 },*/
                             notEmpty: {
                                 message: 'Phone is required'
                             }
@@ -80,10 +81,6 @@ var KTModalEmployersAdd = function () {
                     },
                     'EmployerContactState': {
                         validators: {
-                            stringLength: {
-                                max: 40,
-                                message: 'State cannot cannot be more than 40 characters',
-                            },
                             notEmpty: {
                                 message: 'State is required'
                             }
@@ -149,7 +146,7 @@ var KTModalEmployersAdd = function () {
                         employer.EmployerContactAddress1 = form.EmployerContactAddress1.value;
                         employer.EmployerContactAddress2 = form.EmployerContactAddress2.value;
                         employer.EmployerContactCity = form.EmployerContactCity.value;
-                        employer.EmployerContactState = form.EmployerContactState.value;
+                        employer.EmployerContactState = document.getElementById('EmployerContactState').value;
                         employer.EmployerContactZip = form.EmployerContactZip.value;
                         var actv = $('input#isActive').prop('checked');
                         employer.isActive = actv;

@@ -18,6 +18,10 @@ var KTModalCustomersAdd = function () {
                 fields: {
                     'FirstName': {
                         validators: {
+                            stringLength: {
+                                max: 50,
+                                message: 'The First Name must be less than 50 characters',
+                            },
                             notEmpty: {
                                 message: 'First name is required'
                             }
@@ -25,6 +29,10 @@ var KTModalCustomersAdd = function () {
                     },
                     'LastName': {
                         validators: {
+                            stringLength: {
+                                max: 50,
+                                message: 'The Last Name must be less than 50 characters',
+                            },
                             notEmpty: {
                                 message: 'Last name is required'
                             }
@@ -32,6 +40,10 @@ var KTModalCustomersAdd = function () {
                     },
                     'Address1': {
                         validators: {
+                            stringLength: {
+                                max: 100,
+                                message: 'Address cannot be more than 100 characters',
+                            },
                             notEmpty: {
                                 message: 'Address is required'
                             }
@@ -39,6 +51,10 @@ var KTModalCustomersAdd = function () {
                     },
                     'ConsultantNameAbbrv': {
                         validators: {
+                            stringLength: {
+                                max: 30,
+                                message: 'The Consultant Name Abbreviation must be less than 30 characters',
+                            },
                             notEmpty: {
                                 message: 'Consultant Name Abbreviation is required'
                             }
@@ -53,6 +69,9 @@ var KTModalCustomersAdd = function () {
                     },
                     'Email': {
                         validators: {
+                            emailAddress: {
+                                message: 'The value is not a valid email address'
+                            },
                             notEmpty: {
                                 message: 'Email is required'
                             }
@@ -67,6 +86,14 @@ var KTModalCustomersAdd = function () {
                     },
                     'City': {
                         validators: {
+                            regexp: {
+                                regexp: /^[a-zA-z] ?([a-zA-z]|[a-zA-z] ).*[a-zA-z]$/,
+                                message: 'Please enter valid city with min 3 characters',
+                            },
+                            stringLength: {
+                                max: 50,
+                                message: 'City cannot cannot be more than 50 characters',
+                            },
                             notEmpty: {
                                 message: 'City is required'
                             }
@@ -81,6 +108,10 @@ var KTModalCustomersAdd = function () {
                     },
                     'Zip': {
                         validators: {
+                            regexp: {
+                                regexp: /^\d{5}$/,
+                                message: 'The US zip code must contain 5 digits',
+                            },
                             notEmpty: {
                                 message: 'Zip is required'
                             }
@@ -88,6 +119,10 @@ var KTModalCustomersAdd = function () {
                     },
                     'Title': {
                         validators: {
+                            stringLength: {
+                                max: 50,
+                                message: 'Title must be less than 50 characters',
+                            },
                             notEmpty: {
                                 message: 'Title is required'
                             }

@@ -1,7 +1,7 @@
-"use strict";
+﻿"use strict";
 
 // Class definition
-var KTModalCustomersAdd = function () {
+var KTModalInvoiceSubmissionsAdd = function () {
     var submitButton;
     var cancelButton;
     var closeButton;
@@ -15,158 +15,89 @@ var KTModalCustomersAdd = function () {
         validator = FormValidation.formValidation(
             form,
             {
-                fields: {
-                    'CustomerName': {
-                        validators: {
-                            stringLength: {
-                                max: 60,
-                                message: 'The name must be less than 60 characters',
-                            },
-                            notEmpty: {
-                                message: 'Name is required'
-                            }
-                        }
-                    },
+               // fields: {
+            //        'CustomerName': {
+          //              validators: {
+                //            notEmpty: {
+             //                   message: 'Customer name is required'
+          //                  }
+                   //     }
+                   // },
+                    
 
-                    'CustomerContactPhone': {
-                        validators: {
-                            //phone: {
-                            //      country: function () {
-                            //          return form.querySelector('[name="US"]').value;
-                            //      },
-                            //       message: 'The value is not a valid phone number',
-                            //   },
-                            notEmpty: {
-                                message: 'Phone is required'
-                            }
-                        }
-                    },
-                    'CustomerContactEmail': {
-                        validators: {
-                            emailAddress: {
-                                message: 'The value is not a valid email address'
-                            },
-                            notEmpty: {
-                                message: 'Email is required'
-                            }
-                        }
-                    },
-                    'CustomerContactAddress1': {
-                        validators: {
-
-                            stringLength: {
-                                max: 100,
-                                message: 'Address cannot cannot be more than 100 characters',
-                            },
-                            notEmpty: {
-                                message: 'Address is required'
-                            }
-                        }
-                    },
-                    'CustomerContactCity': {
-                        validators: {
-                            regexp: {
-                                regexp: /^[a-zA-z] ?([a-zA-z]|[a-zA-z] ).*[a-zA-z]$/,
-                                message: 'Please enter valid city with min 3 characters',
-                            },
-                            stringLength: {
-                                max: 50,
-                                message: 'City cannot cannot be more than 50 characters',
-                            },
-                            notEmpty: {
-                                message: 'City is required'
-                            }
-                        }
-                    },
-                    'CustomerContactState': {
-                        validators: {
-                            notEmpty: {
-                                message: 'State is required'
-                            }
-                        }
-                    },
-                    'CustomerContactZip': {
-                        validators: {
-                            regexp: {
-                                regexp: /^\d{5}$/,
-                                message: 'The US zip code must contain 5 digits',
-                            },
-                            notEmpty: {
-                                message: 'ZipCode is required'
-                            }
-                        }
-                    },
-                    'CustomerTerm': {
-                        validators: {
-                            notEmpty: {
-                                message: 'Term is required'
-                            }
-                        }
+                    plugins: {
+                        trigger: new FormValidation.plugins.Trigger(),
+                        bootstrap: new FormValidation.plugins.Bootstrap5({
+                            rowSelector: '.fv-row',
+                            eleInvalidClass: '',
+                            eleValidClass: ''
+                        })
                     }
-
-                },
-                plugins: {
-                    trigger: new FormValidation.plugins.Trigger(),
-                    bootstrap: new FormValidation.plugins.Bootstrap5({
-                        rowSelector: '.fv-row',
-                        eleInvalidClass: '',
-                        eleValidClass: ''
-                    })
                 }
-            }
         );
 
         // Revalidate country field. For more info, plase visit the official plugin site: https://select2.org/
-        //$(form.querySelector('[name="country"]')).on('change', function() {
+        //$(form.querySelector('[name="CustomerName"]')).on('change', function() {
         //    // Revalidate the field when an option is chosen
-        //    validator.revalidateField('country');
+        //    validator.revalidateField('CustomerName');
         //});
 
         // Action buttons
         submitButton.addEventListener('click', function (e) {
             e.preventDefault();
-            //debugger;
+            /*debugger;*/
             // Validate form before submit
             if (validator) {
                 validator.validate().then(function (status) {
                     console.log('validated!');
 
                     if (status == 'Valid') {
-
-
                         submitButton.setAttribute('data-kt-indicator', 'on');
-
+                        /*debugger;*/
                         // Disable submit button whilst loading
-                        //submitButton.disabled = true;
-                        var customer = {};
-                        customer.CustomerName = form.CustomerName.value;
-                        customer.CustomerContactPhone = form.CustomerContactPhone.value;
-                        customer.CustomerContactEmail = form.CustomerContactEmail.value;
-                        customer.CustomerContactAddress1 = form.CustomerContactAddress1.value;
-                        customer.CustomerContactAddress2 = form.CustomerContactAddress2.value;
-                        customer.CustomerContactCity = form.CustomerContactCity.value;
-                     //   customer.CustomerContactState = form.CustomerContactState.value;
-                        customer.CustomerContactState = document.getElementById('CustomerContactState').value;
+                        var invoicesubmissionData = {};
+                        invoicesubmissionData.CustomerIdFK = form.CustomerName.value;
+                        invoicesubmissionData.Year = form.Year.value;
+                        invoicesubmissionData.Month = form.Month.value;
+                        // positionData.PositionFamily = form.PositionFamily.value;
+                   //     invoicesubmissionData.InvoiceSubmissionId = form.InvoiceSubmissionId.value;
+                      //  positionData.PositionScopeVariant = form.PositionScopeVariant.value;
+                      //  positionData.PurchaseOrderNo = form.PurchaseOrderNo.value;
+                        var actv = $('input#Status').prop('checked');
+                        invoicesubmissionData.Status = actv;
+                      //  positionData.PurchaseRequisitionNo = form.PurchaseRequisitionNo.value;
+                      //  positionData.InactiveDate = form.InactiveDate.value;
+                      //  positionData.InactiveReason = form.InactiveReason.value;
+                        debugger;
+                        if (actv == false && form.InactiveReason.value == "") {
+                            $("#divreason").show();
+                            submitButton.setAttribute('data-kt-indicator', 'off');
+                            return false;
+                        } else {
+                            $("#divreason").hide();
+                        }
+                        if (actv == false && form.InactiveDate.value == "") {
+                            $("#divdate").show();
+                            submitButton.setAttribute('data-kt-indicator', 'off');
+                            return false;
+                        } else {
+                            $("#divdate").hide();
+                        }
 
-                        customer.CustomerContactZip = form.CustomerContactZip.value;
-                        customer.CustomerTerm = form.CustomerTerm.value;
-                        var actv = $('input#isActive').prop('checked');
-                        customer.isActive = actv;
+                        console.log("ConsultantObj:" + JSON.stringify(invoicesubmissionData));
 
-                        customer.CustomerIdPK = form.CustomerIdPK.value;
-                        console.log("customer:" + JSON.stringify(customer))
                         $.ajax({
                             type: "POST",
-                            url: '/Customer/AddCustomer',
-                            data: '{customer: ' + JSON.stringify(customer) + '}',
+                            //url: '@Url.Action("AddConsultant", "Consultant")',
+                            url: '/InvoiceSubmission/AddInvoiceSubmission',
+                            data: '{ismodel: ' + JSON.stringify(invoicesubmissionData) + '}',
                             dataType: "json",
                             contentType: "application/json; charset=utf-8",
                             success: function (response) {
                                 submitButton.removeAttribute('data-kt-indicator');
 
                                 // alert("Data has been added successfully.");
-                                if (response.message == "success" || response.message == "updated") {
-
+                                if (response.message == "Success") {
                                     Swal.fire({
                                         text: "Form has been successfully submitted!",
                                         icon: "success",
@@ -217,9 +148,7 @@ var KTModalCustomersAdd = function () {
 
                             }
                         });
-
                     } else {
-
                         Swal.fire({
                             text: "Sorry, looks like there are some errors detected, please try again.",
                             icon: "error",
@@ -303,12 +232,12 @@ var KTModalCustomersAdd = function () {
         // Public functions
         init: function () {
             // Elements
-            modal = new bootstrap.Modal(document.querySelector('#kt_modal_add_customer'));
+            modal = new bootstrap.Modal(document.querySelector('#kt_modal_add_invoicesubmission'));
 
-            form = document.querySelector('#kt_modal_add_customer_form');
-            submitButton = form.querySelector('#kt_modal_add_customer_submit');
-            cancelButton = form.querySelector('#kt_modal_add_customer_cancel');
-            closeButton = form.querySelector('#kt_modal_add_customer_close');
+            form = document.querySelector('#kt_modal_add_invoicesubmission_form');
+            submitButton = form.querySelector('#kt_modal_add_invoicesubmission_submit');
+            cancelButton = form.querySelector('#kt_modal_add_invoicesubmission_cancel');
+            closeButton = form.querySelector('#kt_modal_add_invoicesubmission_close');
 
             handleForm();
         }
@@ -317,5 +246,5 @@ var KTModalCustomersAdd = function () {
 
 // On document ready
 KTUtil.onDOMContentLoaded(function () {
-    KTModalCustomersAdd.init();
+    KTModalInvoiceSubmissionsAdd.init();
 });

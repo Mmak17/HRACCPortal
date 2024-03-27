@@ -777,6 +777,43 @@ License: For each use you must have a valid license purchased only from above li
                 $('#CustomerContactPhone').val("");
             }
         });
+
+        $('#EmployerContactPhone').on('input', function () {
+            var val = this.value.replace(/\D/g, '');
+            if (val.length > 10) {
+                this.value = this.value.slice(0, 12);
+            } else {
+                this.value = (val.slice(0, 3) + '-' + val.slice(3, 6) + '-' + val.slice(6, 10)).trim();
+            }
+            if (this.value == "-" || this.value == "--") {
+                this.value = "";
+            }
+        });
+        $('#EmployerContactPhone').blur(function () {
+            var p = $('#EmployerContactPhone').val();
+            if (p.length < 12) {
+                $('#EmployerContactPhone').val("");
+            }
+        });
+
+        $('#Phone').on('input', function () {
+            var val = this.value.replace(/\D/g, '');
+            if (val.length > 10) {
+                this.value = this.value.slice(0, 12);
+            } else {
+                this.value = (val.slice(0, 3) + '-' + val.slice(3, 6) + '-' + val.slice(6, 10)).trim();
+            }
+            if (this.value == "-" || this.value == "--") {
+                this.value = "";
+            }
+        });
+        $('#Phone').blur(function () {
+            var p = $('#Phone').val();
+            if (p.length < 12) {
+                $('#Phone').val("");
+            }
+        });
+
     </script>
     @RenderSection("scripts", required: false)
     <!--end::Custom Javascript-->
@@ -787,6 +824,5 @@ License: For each use you must have a valid license purchased only from above li
 
 
 
-//Menus to be added in layout
-//Sub-Contractor
+
 

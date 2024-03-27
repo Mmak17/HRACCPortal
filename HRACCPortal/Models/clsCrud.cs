@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using System.Xml.Linq;
 using HRACCPortal.Edmx;
 using HRACCPortal.ObjectModel;
 
@@ -114,16 +115,19 @@ namespace HRACCPortal.Models
                 customerModel.CustomerContactEmail = customer.CustomerContactEmail;
                 customerModel.CustomerContactPhone = customer.CustomerContactPhone;
                 customerModel.CustomerContactState = customer.CustomerContactState;
+                
+
                 customerModel.CustomerContactZip = customer.CustomerContactZip;
                 customerModel.CustomerName = customer.CustomerName;
-                if (!string.IsNullOrEmpty(customer.CustomerName))
-                {
-                    customerModel.CustomerTerm = customer.CustomerTerm;
-                }
-                else
-                {
-                    customerModel.CustomerTerm = "30";
-                }
+              //  if (!string.IsNullOrEmpty(customer.CustomerName))
+                //{
+                  //  customerModel.CustomerTerm = customer.CustomerTerm;
+               // }
+                //else
+                //{
+                  //  customerModel.CustomerTerm = "30";
+               // }
+               customerModel.CustomerTerm = customer.CustomerTerm;
                 customerModel.DateUpdated = DateTime.Now.ToString("MM/dd/yyyy").Replace("-", "/");
                 customerModel.UpdatedBy = "ADMIN";
                 customerModel.CustomerIdPK = customer.CustomerIdPK;

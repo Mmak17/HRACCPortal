@@ -58,7 +58,7 @@ namespace HRACCPortal.Models
                 updatePaymentsReceived.InvoiceNumber = model.InvoiceNumber;
                 updatePaymentsReceived.InvoiceAmount = model.InvoiceAmount;
                 updatePaymentsReceived.InvoiceDueDate = model.InvoiceDueDate;
-               // updateBalanceSheet.Balance = model.Balance;
+             //   updatePaymentsReceived.Balance = model.Balance;
                 updatePaymentsReceived.DateUpdated = IndianTimeNow;
                 updatePaymentsReceived.UpdatedBy = "ADMIN";
                 statusDetail = hRACCDBEntities.SaveChanges() == 1 ? "Success" : "Failed";
